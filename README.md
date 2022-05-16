@@ -4,6 +4,8 @@ Grabs a compiled Svelte component (ES Module) from the interwebs and mounts it s
 
 ## TODO
 
-- [ ] Lots to do...
+- [ ] Lots to do:
+- [ ] Pass in props in a variable way
+- [ ] Pass in props according to Component props schema?
 - [ ] Sandbox the iframe for untrusted code execution
 - [ ] Fetch improvements
