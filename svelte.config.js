@@ -3,6 +3,19 @@ import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
 import path from 'path';
+import { spawn } from 'child_process';
+
+function toExit() {
+	if (server) server.kill(0);
+}
+
+let server = spawn('rollup', ['-cw'], {
+	stdio: ['ignore', 'inherit', 'inherit'],
+	shell: true
+});
+
+process.on('SIGTERM', toExit);
+process.on('exit', toExit);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -20,6 +33,10 @@ const config = {
 		},
 
 		vite: {
+			// plugins:[{
+			// 	inlineSvelte('./src/srcdoc/generated.html'),
+			//  	enforce: 'pre' // https://vitejs.dev/guide/using-plugins.html#enforcing-plugin-ordering
+			// }],
 			resolve: {
 				alias: {
 					'@douganderson444/svelte-component-gateway': path.resolve('src/lib')
