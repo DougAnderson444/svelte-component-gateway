@@ -1,4 +1,4 @@
-import { SvelteComponent, init, safe_not_equal, text, claim_text, insert_hydration, detach, element, space, claim_element, children, claim_space, attr, append_hydration, noop, binding_callbacks, bind, create_component, claim_component, mount_component, add_flush_callback, transition_in, transition_out, destroy_component, set_input_value, listen, set_data, check_outros, onMount, group_outros } from "../chunks/index-954db091.js";
+import { SvelteComponent, init, safe_not_equal, text, claim_text, insert_hydration, detach, element, space, claim_element, children, claim_space, attr, append_hydration, noop, binding_callbacks, bind, create_component, claim_component, mount_component, add_flush_callback, transition_in, transition_out, destroy_component, getContext, set_input_value, listen, set_data, check_outros, component_subscribe, onMount, group_outros } from "../chunks/index-db8e7457.js";
 var IFrame_svelte_svelte_type_style_lang = "";
 function create_if_block$1(ctx) {
   let t;
@@ -101,7 +101,7 @@ function create_fragment$2(ctx) {
 }
 function instance$2($$self, $$props, $$invalidate) {
   let { iframe } = $$props;
-  let { srcdoc } = $$props;
+  let { srcdoc: srcdoc2 } = $$props;
   let { serializedSource } = $$props;
   function iframe_1_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
@@ -113,11 +113,11 @@ function instance$2($$self, $$props, $$invalidate) {
     if ("iframe" in $$props2)
       $$invalidate(0, iframe = $$props2.iframe);
     if ("srcdoc" in $$props2)
-      $$invalidate(1, srcdoc = $$props2.srcdoc);
+      $$invalidate(1, srcdoc2 = $$props2.srcdoc);
     if ("serializedSource" in $$props2)
       $$invalidate(2, serializedSource = $$props2.serializedSource);
   };
-  return [iframe, srcdoc, serializedSource, iframe_1_binding];
+  return [iframe, srcdoc2, serializedSource, iframe_1_binding];
 }
 class IFrame extends SvelteComponent {
   constructor(options) {
@@ -129,19 +129,35 @@ class IFrame extends SvelteComponent {
     });
   }
 }
+var srcdoc = `<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+		<script defer type="module">
+			var app=function(){"use strict";function t(){}function e(t){return t()}function n(){return Object.create(null)}function o(t){t.forEach(e)}function r(t){return"function"==typeof t}function s(t,e){return t!=t?e==e:t!==e||t&&"object"==typeof t||"function"==typeof t}function i(t){t.parentNode.removeChild(t)}function c(t){return document.createElement(t)}function a(t,e,n,o){return t.addEventListener(e,n,o),()=>t.removeEventListener(e,n,o)}let d,f;function l(){if(void 0===d){d=!1;try{"undefined"!=typeof window&&window.parent&&window.parent.document}catch(t){d=!0}}return d}function u(t){f=t}const p=[],h=[],m=[],g=[],$=Promise.resolve();let w=!1;function b(t){m.push(t)}const y=new Set;let v=0;function _(){const t=f;do{for(;v<p.length;){const t=p[v];v++,u(t),x(t.$$)}for(u(null),p.length=0,v=0;h.length;)h.pop()();for(let t=0;t<m.length;t+=1){const e=m[t];y.has(e)||(y.add(e),e())}m.length=0}while(p.length);for(;g.length;)g.pop()();w=!1,y.clear(),u(t)}function x(t){if(null!==t.fragment){t.update(),o(t.before_update);const e=t.dirty;t.dirty=[-1],t.fragment&&t.fragment.p(t.ctx,e),t.after_update.forEach(b)}}const E=new Set;const H="undefined"!=typeof window?window:"undefined"!=typeof globalThis?globalThis:global;function k(t,e){-1===t.$$.dirty[0]&&(p.push(t),w||(w=!0,$.then(_)),t.$$.dirty.fill(0)),t.$$.dirty[e/31|0]|=1<<e%31}function O(s,c,a,d,l,p,h,m=[-1]){const g=f;u(s);const $=s.$$={fragment:null,ctx:null,props:p,update:t,not_equal:l,bound:n(),on_mount:[],on_destroy:[],on_disconnect:[],before_update:[],after_update:[],context:new Map(c.context||(g?g.$$.context:[])),callbacks:n(),dirty:m,skip_bound:!1,root:c.target||g.$$.root};h&&h($.root);let w=!1;if($.ctx=a?a(s,c.props||{},((t,e,...n)=>{const o=n.length?n[0]:e;return $.ctx&&l($.ctx[t],$.ctx[t]=o)&&(!$.skip_bound&&$.bound[t]&&$.bound[t](o),w&&k(s,t)),e})):[],$.update(),w=!0,o($.before_update),$.fragment=!!d&&d($.ctx),c.target){if(c.hydrate){const t=function(t){return Array.from(t.childNodes)}(c.target);$.fragment&&$.fragment.l(t),t.forEach(i)}else $.fragment&&$.fragment.c();c.intro&&((y=s.$$.fragment)&&y.i&&(E.delete(y),y.i(v))),function(t,n,s,i){const{fragment:c,on_mount:a,on_destroy:d,after_update:f}=t.$$;c&&c.m(n,s),i||b((()=>{const n=a.map(e).filter(r);d?d.push(...n):o(n),t.$$.on_mount=[]})),f.forEach(b)}(s,c.target,c.anchor,c.customElement),_()}var y,v;u(g)}function W(t,e){document.dispatchEvent(function(t,e,{bubbles:n=!1,cancelable:o=!1}={}){const r=document.createEvent("CustomEvent");return r.initCustomEvent(t,n,o,e),r}(t,Object.assign({version:"3.48.0"},e),{bubbles:!0}))}const j="UPDATED",{window:I}=H;function S(e){let n,o,r,s;const d={c:function(){var t,o,r;n=c("div"),function(t,e,n){null==n?t.removeAttribute(e):t.getAttribute(e)!==n&&t.setAttribute(e,n)}(t=n,o="id",r="app"),null==r?W("SvelteDOMRemoveAttribute",{node:t,attribute:o}):W("SvelteDOMSetAttribute",{node:t,attribute:o,value:r}),b((()=>e[3].call(n))),function(t,e,n,o,r){t.__svelte_meta={loc:{file:e,line:n,column:o,char:r}}}(n,"src\\\\lib\\\\iframeSrc\\\\InnerHandler.svelte",34,0,972)},l:function(t){throw new Error("options.hydrate only works if the component was compiled with the \`hydratable: true\` option")},m:function(t,d){!function(t,e,n){W("SvelteDOMInsert",{target:t,node:e,anchor:n}),function(t,e,n){t.insertBefore(e,n||null)}(t,e,n)}(t,n,d),o=function(t,e){"static"===getComputedStyle(t).position&&(t.style.position="relative");const n=c("iframe");n.setAttribute("style","display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border: 0; opacity: 0; pointer-events: none; z-index: -1;"),n.setAttribute("aria-hidden","true"),n.tabIndex=-1;const o=l();let r;return o?(n.src="data:text/html,<script>onresize=function(){parent.postMessage(0,'*')}<\\/script>",r=a(window,"message",(t=>{t.source===n.contentWindow&&e()}))):(n.src="about:blank",n.onload=()=>{r=a(n.contentWindow,"resize",e)}),function(t,e){t.appendChild(e)}(t,n),()=>{(o||r&&n.contentWindow)&&r(),i(n)}}(n,e[3].bind(n)),r||(s=function(t,e,n,o,r,s){const i=!0===o?["capture"]:o?Array.from(Object.keys(o)):[];r&&i.push("preventDefault"),s&&i.push("stopPropagation"),W("SvelteDOMAddEventListener",{node:t,event:e,handler:n,modifiers:i});const c=a(t,e,n,o);return()=>{W("SvelteDOMRemoveEventListener",{node:t,event:e,handler:n,modifiers:i}),c()}}(I,"message",e[2],!1,!1,!1),r=!0)},p:t,i:t,o:t,d:function(t){var e;t&&(W("SvelteDOMRemove",{node:e=n}),i(e)),o(),r=!1,s()}};return W("SvelteRegisterBlock",{block:d,id:S.name,type:"component",source:"",ctx:e}),d}function A(t,e,n){let{$$slots:o={},$$scope:r}=e;!function(t,e,n){for(const o of Object.keys(e))~n.indexOf(o)||console.warn(\`<\${t}> received an unexpected slot "\${o}".\`)}("InnerHandler",o,[]);let s,{offsetWidth:i}=e,{offsetHeight:c}=e;async function a(t){const{esModule:e,props:n}=t.data,o=new Blob([e],{type:"text/javascript"}),r=URL.createObjectURL(o);import(r).then((function({default:t}){s&&s.$destroy(),document.getElementById("app").innerHTML="",s=new t({target:document.getElementById("app")||document.body,props:{...n}}),window.parent.postMessage(j,window.parent)}))}const d=["offsetWidth","offsetHeight"];return Object.keys(e).forEach((t=>{~d.indexOf(t)||"$$"===t.slice(0,2)||"slot"===t||console.warn(\`<InnerHandler> was created with unknown prop '\${t}'\`)})),t.$$set=t=>{"offsetWidth"in t&&n(0,i=t.offsetWidth),"offsetHeight"in t&&n(1,c=t.offsetHeight)},t.$capture_state=()=>({UPDATED:j,offsetWidth:i,offsetHeight:c,component:s,handleMessage:a}),t.$inject_state=t=>{"offsetWidth"in t&&n(0,i=t.offsetWidth),"offsetHeight"in t&&n(1,c=t.offsetHeight),"component"in t&&(s=t.component)},e&&"$$inject"in e&&t.$inject_state(e.$$inject),[i,c,a,function(){i=this.offsetWidth,c=this.offsetHeight,n(0,i),n(1,c)}]}return new class extends class extends class{$destroy(){!function(t,e){const n=t.$$;null!==n.fragment&&(o(n.on_destroy),n.fragment&&n.fragment.d(e),n.on_destroy=n.fragment=null,n.ctx=[])}(this,1),this.$destroy=t}$on(t,e){const n=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return n.push(e),()=>{const t=n.indexOf(e);-1!==t&&n.splice(t,1)}}$set(t){var e;this.$$set&&(e=t,0!==Object.keys(e).length)&&(this.$$.skip_bound=!0,this.$$set(t),this.$$.skip_bound=!1)}}{constructor(t){if(!t||!t.target&&!t.$$inline)throw new Error("'target' is a required option");super()}$destroy(){super.$destroy(),this.$destroy=()=>{console.warn("Component was already destroyed")}}$capture_state(){}$inject_state(){}}{constructor(t){super(t),O(this,t,A,S,s,{offsetWidth:0,offsetHeight:1}),W("SvelteRegisterComponent",{component:this,tagName:"InnerHandler",options:t,id:S.name});const{ctx:e}=this.$$,n=t.props||{};void 0!==e[0]||"offsetWidth"in n||console.warn("<InnerHandler> was created without expected prop 'offsetWidth'"),void 0!==e[1]||"offsetHeight"in n||console.warn("<InnerHandler> was created without expected prop 'offsetHeight'")}get offsetWidth(){throw new Error("<InnerHandler>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'")}set offsetWidth(t){throw new Error("<InnerHandler>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'")}get offsetHeight(){throw new Error("<InnerHandler>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'")}set offsetHeight(t){throw new Error("<InnerHandler>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'")}}({target:document.body,props:{}})}();
+
+		<\/script>
+	</head>
+
+	<body></body>
+</html>
+`;
+const UPDATED = "UPDATED";
 function create_fragment$1(ctx) {
   let iframe_1;
   let updating_iframe;
   let current;
   function iframe_1_iframe_binding(value) {
-    ctx[6](value);
+    ctx[4](value);
   }
   let iframe_1_props = {
-    srcdoc: ctx[0],
-    serializedSource: ctx[1]
+    srcdoc,
+    serializedSource: ctx[0]
   };
-  if (ctx[2] !== void 0) {
-    iframe_1_props.iframe = ctx[2];
+  if (ctx[1] !== void 0) {
+    iframe_1_props.iframe = ctx[1];
   }
   iframe_1 = new IFrame({ props: iframe_1_props });
   binding_callbacks.push(() => bind(iframe_1, "iframe", iframe_1_iframe_binding));
@@ -159,12 +175,10 @@ function create_fragment$1(ctx) {
     p(ctx2, [dirty]) {
       const iframe_1_changes = {};
       if (dirty & 1)
-        iframe_1_changes.srcdoc = ctx2[0];
-      if (dirty & 2)
-        iframe_1_changes.serializedSource = ctx2[1];
-      if (!updating_iframe && dirty & 4) {
+        iframe_1_changes.serializedSource = ctx2[0];
+      if (!updating_iframe && dirty & 2) {
         updating_iframe = true;
-        iframe_1_changes.iframe = ctx2[2];
+        iframe_1_changes.iframe = ctx2[1];
         add_flush_callback(() => updating_iframe = false);
       }
       iframe_1.$set(iframe_1_changes);
@@ -184,20 +198,15 @@ function create_fragment$1(ctx) {
     }
   };
 }
-const UPDATED = "updated";
 function instance$1($$self, $$props, $$invalidate) {
-  let { srcdoc } = $$props;
   let { esModule } = $$props;
   let { props } = $$props;
-  let { injectedCSS = `/* Some STYLES */
-	html, body {position: relative;width: 100%;height: 100%;}body {color: #333;margin: 0;padding: 0px 2px;box-sizing: border-box;font-family: -apple-system, "Segoe UI", BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;}a {color: rgb(0,100,200);text-decoration: none;}a:hover {text-decoration: underline;}a:visited {color: rgb(0,80,160);}label {display: block;}input, button, select, textarea {font-family: inherit;font-size: inherit;padding: 0.4em;margin: 0 0 0.5em 0;box-sizing: border-box;border: 1px solid #ccc;border-radius: 2px;}input:disabled {color: #ccc;}input[type="range"] {height: 0;}button {color: #333;background-color: #f4f4f4;outline: none;}button:active {background-color: #ddd;}button:focus {border-color: #666;} p:last-child{margin-bottom: 30px;}	
-	` } = $$props;
   let { serializedSource } = $$props;
   let iframe;
   const handleLoad = async () => {
     window.addEventListener("message", (event) => {
       if (iframe && event.data == UPDATED) {
-        $$invalidate(1, serializedSource = new XMLSerializer().serializeToString(iframe == null ? void 0 : iframe.contentWindow.document));
+        $$invalidate(0, serializedSource = new XMLSerializer().serializeToString(iframe == null ? void 0 : iframe.contentWindow.document));
       }
     }, false);
     update({ esModule, props });
@@ -209,152 +218,65 @@ function instance$1($$self, $$props, $$invalidate) {
   }
   function iframe_1_iframe_binding(value) {
     iframe = value;
-    $$invalidate(2, iframe);
+    $$invalidate(1, iframe);
   }
   $$self.$$set = ($$props2) => {
-    if ("srcdoc" in $$props2)
-      $$invalidate(0, srcdoc = $$props2.srcdoc);
     if ("esModule" in $$props2)
-      $$invalidate(3, esModule = $$props2.esModule);
+      $$invalidate(2, esModule = $$props2.esModule);
     if ("props" in $$props2)
-      $$invalidate(4, props = $$props2.props);
-    if ("injectedCSS" in $$props2)
-      $$invalidate(5, injectedCSS = $$props2.injectedCSS);
+      $$invalidate(3, props = $$props2.props);
     if ("serializedSource" in $$props2)
-      $$invalidate(1, serializedSource = $$props2.serializedSource);
+      $$invalidate(0, serializedSource = $$props2.serializedSource);
   };
   $$self.$$.update = () => {
-    if ($$self.$$.dirty & 24) {
+    if ($$self.$$.dirty & 12) {
       esModule && update({ esModule, props });
     }
-    if ($$self.$$.dirty & 4) {
+    if ($$self.$$.dirty & 2) {
       iframe && iframe.addEventListener("load", handleLoad);
     }
-    if ($$self.$$.dirty & 32) {
-      $$invalidate(0, srcdoc = `
-		<!doctype html>
-		<html>
-			<head>
-				<script id="injected-base64-script">
-					// insert var src64 here
-					// var me = document.getElementById('injected-base64-script');
-				<\/script>
-				<link href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css" rel="stylesheet" />
-				<style>
-					/* STYLES */
-					${injectedCSS}
-				</style>
-				<script type="module">
-
-					let component;
-
-					if(typeof src64 != 'undefined'){
-						console.log('pre-existing src64, convert and load')
-						fetch(src64).then(async function(response){
-							const blob = await response.blob()
-							const url = URL.createObjectURL(blob);
-							import(url).then(function ({ default: App }) {
-								if (component) component.$destroy();
-								document.getElementById('app').innerHTML = '';
-								component = new App({ target: document.getElementById('app') })
-							})
-						})
-					} else {
-						// console.log('no pre-existing src64')
-					}
-					
-					async function fetchedBlobToDataURL (blobUrl) {
-
-						return new Promise(async function (resolve, reject) {
-
-							const response = await fetch(blobUrl);
-							const blob = await response.blob()
-
-							var blobAsDataUrl
-							var reader = new FileReader();
-
-							reader.addEventListener("load", function () {
-								blobAsDataUrl = this.result;
-								resolve(blobAsDataUrl)
-							}, false);
-
-							reader.readAsDataURL(blob)
-						})
-					}
-
-					// <!-- Turn the string into actual javascript code -->
-					// <!--   import (url) <- ObjectURL <- Blob         -->
-
-					async function update({esModule, props}) {
-						
-						// <!-- type: 'text/javascript would normally come from response headers -->
-						const blob = new Blob([esModule], { type: 'text/javascript' });
-						const url = URL.createObjectURL(blob);
-						const src64 = await fetchedBlobToDataURL(url)
-
-						var oldElement = document.getElementById('injected-base64-script');
-						oldElement.parentNode.removeChild(oldElement);
-
-						var newElement = document.createElement("script");
-						newElement.setAttribute('id', 'injected-base64-script');
-						var textnode = document.createTextNode("var src64 = '" + src64 + "'");
-						newElement.appendChild(textnode);
-						document.getElementsByTagName('head').item(0).prepend(newElement);
-
-						import(url).then(function ({ default: App }) {
-							if (component) component.$destroy();
-
-							document.getElementById('app').innerHTML = '';
-							component = new App({ 
-								target: document.getElementById('app'), 
-								props: { ...props }
-							})
-
-							// URL.revokeObjectURL(url) // memory management 
-
-							window.parent.postMessage("${UPDATED}", window.parent)
-						})
-					}
-
-					window.addEventListener('message', function (event) {
-						update({ ...event.data })
-					}, false)
-
-				<\/script>
-			</head>
-			<body>
-				<div id="app"></div>
-			</body>
-		</html>
-	`);
-    }
   };
-  return [
-    srcdoc,
-    serializedSource,
-    iframe,
-    esModule,
-    props,
-    injectedCSS,
-    iframe_1_iframe_binding
-  ];
+  return [serializedSource, iframe, esModule, props, iframe_1_iframe_binding];
 }
-class Lib extends SvelteComponent {
+class Gateway extends SvelteComponent {
   constructor(options) {
     super();
     init(this, options, instance$1, create_fragment$1, safe_not_equal, {
-      srcdoc: 0,
-      esModule: 3,
-      props: 4,
-      injectedCSS: 5,
-      serializedSource: 1
+      esModule: 2,
+      props: 3,
+      serializedSource: 0
     });
   }
 }
+const getStores = () => {
+  const stores = getContext("__svelte__");
+  return {
+    page: {
+      subscribe: stores.page.subscribe
+    },
+    navigating: {
+      subscribe: stores.navigating.subscribe
+    },
+    get preloading() {
+      console.error("stores.preloading is deprecated; use stores.navigating instead");
+      return {
+        subscribe: stores.navigating.subscribe
+      };
+    },
+    session: stores.session,
+    updated: stores.updated
+  };
+};
+const page = {
+  subscribe(fn) {
+    const store = getStores().page;
+    return store.subscribe(fn);
+  }
+};
 function create_if_block(ctx) {
   let gateway;
   let current;
-  gateway = new Lib({
+  gateway = new Gateway({
     props: {
       esModule: ctx[1],
       props: ctx[2]
@@ -546,10 +468,13 @@ function create_fragment(ctx) {
   };
 }
 function instance($$self, $$props, $$invalidate) {
+  let $page;
+  component_subscribe($$self, page, ($$value) => $$invalidate(6, $page = $$value));
   let url = "https://bafybeidchd6z3eydlkl7sloi4banjjk46aurusxj2ky2v5zj7zzzwsgwsq.ipfs.cf-ipfs.com/";
   let component;
   let props = { name: "Douglas" };
   onMount(() => {
+    $$invalidate(0, url = $page.url.searchParams.get("url"));
   });
   let fetched;
   async function doFetch(url2) {
@@ -580,4 +505,4 @@ class Routes extends SvelteComponent {
   }
 }
 export { Routes as default };
-//# sourceMappingURL=index.svelte-bd6328f8.js.map
+//# sourceMappingURL=index.svelte-a298031a.js.map

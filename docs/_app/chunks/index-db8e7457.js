@@ -31,6 +31,16 @@ function src_url_equal(element_src, url) {
 function is_empty(obj) {
   return Object.keys(obj).length === 0;
 }
+function subscribe(store, ...callbacks) {
+  if (store == null) {
+    return noop;
+  }
+  const unsub = store.subscribe(...callbacks);
+  return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+}
+function component_subscribe(component, store, callback) {
+  component.$$.on_destroy.push(subscribe(store, callback));
+}
 function create_slot(definition, ctx, $$scope, fn) {
   if (definition) {
     const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
@@ -312,6 +322,9 @@ function setContext(key, context) {
   get_current_component().$$.context.set(key, context);
   return context;
 }
+function getContext(key) {
+  return get_current_component().$$.context.get(key);
+}
 const dirty_components = [];
 const binding_callbacks = [];
 const render_callbacks = [];
@@ -570,5 +583,5 @@ class SvelteComponent {
     }
   }
 }
-export { SvelteComponent, add_flush_callback, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_text, create_component, create_slot, destroy_component, detach, element, empty, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, query_selector_all, safe_not_equal, setContext, set_data, set_input_value, set_style, space, src_url_equal, text, tick, transition_in, transition_out, update_slot_base };
-//# sourceMappingURL=index-954db091.js.map
+export { SvelteComponent, add_flush_callback, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_text, component_subscribe, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, query_selector_all, safe_not_equal, setContext, set_data, set_input_value, set_style, space, src_url_equal, text, tick, transition_in, transition_out, update_slot_base };
+//# sourceMappingURL=index-db8e7457.js.map
