@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
-	import Gateway from '$lib/index.svelte';
+	import Gateway from '@douganderson444/svelte-component-gateway';
+	import { page } from '$app/stores';
 
 	let url = 'https://bafybeidchd6z3eydlkl7sloi4banjjk46aurusxj2ky2v5zj7zzzwsgwsq.ipfs.cf-ipfs.com/';
 
@@ -9,6 +10,8 @@
 	let props = { name: 'Douglas' };
 	let mounted;
 	onMount(() => {
+		url = $page.url.searchParams.get('url');
+		// $page.url.
 		// fetch the svelte component url variable and mount the Svelte app to target element
 		// mount svelte iife component to dom target
 		// import(`${url}`).then((module) => {
