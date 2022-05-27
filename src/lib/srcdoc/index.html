@@ -1,93 +1,91 @@
-<!doctype html>
-		<html>
-			<head>
-				<script id="injected-base64-script">
-					// insert var src64 here
-					// var me = document.getElementById('injected-base64-script');
-				<\/script>
-				<link href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css" rel="stylesheet" />
-				<style>
-					/* STYLES */
-					${injectedCSS}
-				<\/style>
-				<script type="module">
+<!DOCTYPE html>
+<html>
+	<head>
+		<script id="injected-base64-script">
+			// insert var src64 here
+			// var me = document.getElementById('injected-base64-script');
+		</script>
+		<script type="module">
+			let component;
 
-					let component;
+			if (typeof src64 != 'undefined') {
+				console.log('pre-existing src64, convert and load');
+				fetch(src64).then(async function (response) {
+					const blob = await response.blob();
+					const url = URL.createObjectURL(blob);
+					import(url).then(function ({ default: App }) {
+						if (component) component.$destroy();
+						document.getElementById('app').innerHTML = '';
+						component = new App({ target: document.getElementById('app') });
+					});
+				});
+			} else {
+				// console.log('no pre-existing src64')
+			}
 
-					if(typeof src64 != 'undefined'){
-						console.log('pre-existing src64, convert and load')
-						fetch(src64).then(async function(response){
-							const blob = await response.blob()
-							const url = URL.createObjectURL(blob);
-							import(url).then(function ({ default: App }) {
-								if (component) component.$destroy();
-								document.getElementById('app').innerHTML = '';
-								component = new App({ target: document.getElementById('app') })
-							})
-						})
-					} else {
-						// console.log('no pre-existing src64')
-					}
-					
-					async function fetchedBlobToDataURL (blobUrl) {
+			async function fetchedBlobToDataURL(blobUrl) {
+				return new Promise(async function (resolve, reject) {
+					const response = await fetch(blobUrl);
+					const blob = await response.blob();
 
-						return new Promise(async function (resolve, reject) {
+					var blobAsDataUrl;
+					var reader = new FileReader();
 
-							const response = await fetch(blobUrl);
-							const blob = await response.blob()
+					reader.addEventListener(
+						'load',
+						function () {
+							blobAsDataUrl = this.result;
+							resolve(blobAsDataUrl);
+						},
+						false
+					);
 
-							var blobAsDataUrl
-							var reader = new FileReader();
+					reader.readAsDataURL(blob);
+				});
+			}
 
-							reader.addEventListener("load", function () {
-								blobAsDataUrl = this.result;
-								resolve(blobAsDataUrl)
-							}, false);
+			// <!-- Turn the string into actual javascript code -->
+			// <!--   import (url) <- ObjectURL <- Blob         -->
 
-							reader.readAsDataURL(blob)
-						})
-					}
+			async function update({ esModule, props }) {
+				// <!-- type: 'text/javascript would normally come from response headers -->
+				const blob = new Blob([esModule], { type: 'text/javascript' });
+				const url = URL.createObjectURL(blob);
+				const src64 = await fetchedBlobToDataURL(url);
 
-					// <!-- Turn the string into actual javascript code -->
-					// <!--   import (url) <- ObjectURL <- Blob         -->
+				var oldElement = document.getElementById('injected-base64-script');
+				oldElement.parentNode.removeChild(oldElement);
 
-					async function update(source) {
-						// <!-- type: 'text/javascript would normally come from response headers -->
-						const blob = new Blob([source], { type: 'text/javascript' });
-						const url = URL.createObjectURL(blob);
-						const src64 = await fetchedBlobToDataURL(url)
+				var newElement = document.createElement('script');
+				newElement.setAttribute('id', 'injected-base64-script');
+				var textnode = document.createTextNode("var src64 = '" + src64 + "'");
+				newElement.appendChild(textnode);
+				document.getElementsByTagName('head').item(0).prepend(newElement);
 
-						var oldElement = document.getElementById('injected-base64-script');
-						oldElement.parentNode.removeChild(oldElement);
+				import(url).then(function ({ default: App }) {
+					if (component) component.$destroy();
 
-						var newElement = document.createElement("script");
-						newElement.setAttribute('id', 'injected-base64-script');
-						var textnode = document.createTextNode("var src64 = '" + src64 + "'");
-						newElement.appendChild(textnode);
-						document.getElementsByTagName('head').item(0).prepend(newElement);
+					document.getElementById('app').innerHTML = '';
+					component = new App({
+						target: document.getElementById('app'),
+						props: { ...props }
+					});
 
-						import(url).then(function ({ default: App }) {
-							if (component) component.$destroy();
+					// URL.revokeObjectURL(url) // memory management
+					window.parent.postMessage('UPDATED', window.parent);
+				});
+			}
 
-							document.getElementById('app').innerHTML = '';
-							component = new App({ 
-                                target: document.getElementById('app'), 
-                                props: {}
-                            })
-
-							// URL.revokeObjectURL(url) // memory management 
-
-							window.parent.postMessage("${UPDATED}", window.parent)
-						})
-					}
-
-					window.addEventListener('message', function (event) {
-						update(event.data)
-					}, false)
-
-				<\/script>
-			</head>
-			<body>
-				<div id="app"></div>
-			</body>
-		</html>
+			window.addEventListener(
+				'message',
+				function (event) {
+					update({ ...event.data });
+				},
+				false
+			);
+		</script>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+</html>
