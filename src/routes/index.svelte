@@ -3,23 +3,26 @@
 	import Gateway from '@douganderson444/svelte-component-gateway';
 	import { page } from '$app/stores';
 
-	let url = 'https://bafybeidchd6z3eydlkl7sloi4banjjk46aurusxj2ky2v5zj7zzzwsgwsq.ipfs.cf-ipfs.com/';
+	let url = 'https://bafybeifeyoww62kxwmpdkqpqou6yxjpo7jstfxujfoxjy5exqjvldyqixu.ipfs.dweb.link';
 
 	let component;
 
 	let props = { name: 'Douglas' };
-	let mounted;
-	onMount(() => {
-		url = $page.url.searchParams.get('url');
-		// $page.url.
-		// fetch the svelte component url variable and mount the Svelte app to target element
-		// mount svelte iife component to dom target
-		// import(`${url}`).then((module) => {
-		// 	module.default.mount(document.getElementById('app'));
-		// });
 
-		mounted = true;
+	let width;
+	let height;
+	let vh;
+
+	onMount(() => {
+		url = $page.url.searchParams.get('url') || url;
+		handleViewportSize();
 	});
+
+	function handleViewportSize(_) {
+		vh = window.innerHeight * 0.01;
+		height = window.innerHeight;
+		width = document?.body.clientWidth; // excludes scrollbar
+	}
 
 	$: if (url) doFetch(url);
 
@@ -34,14 +37,11 @@
 			console.log(error);
 		}
 	}
-
-	// .then((response) => response.text())
-	// .then((text) => {
-	// 	component = text;
-	// });}
 </script>
 
-<main class="m-4">
+<svelte:window on:resize={handleViewportSize} />
+
+<div class="app" style="--vh: {vh}px; height: calc(var(--vh, 1vh) * 100);">
 	<h1 class="text-3xl font-bold py-2">Svelte Component Gateway</h1>
 	<p class="my-2">
 		Loading from // make form input with url default
@@ -51,8 +51,17 @@
 
 	Props: {JSON.stringify(props)}
 
-	{#if component}
-		<Gateway esModule={component} {props} />
-	{/if}
-	<!-- {component} -->
-</main>
+	<div class="border flex-auto">
+		{#if component}
+			<Gateway esModule={component} bind:props {width} {height} />
+		{/if}
+	</div>
+</div>
+
+<style>
+	.app {
+		height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+		display: flex;
+		flex-direction: column;
+	}
+</style>

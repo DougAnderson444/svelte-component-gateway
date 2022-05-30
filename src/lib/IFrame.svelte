@@ -11,11 +11,18 @@
 		{/if}
 	</div>
 	<div class="iframe-inner">
-		<iframe title="Rendered REPL" bind:this={iframe} {srcdoc} />
+		<iframe title="Rendered Component" bind:this={iframe} {srcdoc} />
 	</div>
 </div>
 
 <style>
+	.iframe-container {
+		height: 100%;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+
 	.header {
 		font-weight: 700;
 		font-size: 0.8rem;
@@ -27,16 +34,8 @@
 		width: 100%;
 		border: 0;
 	}
-	.iframe-container {
-		display: flex;
-		flex-direction: column;
-		border: 1px solid #a2a2a252;
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-		border-radius: 4px;
-	}
+
 	.iframe-inner {
-		flex: 1;
 		height: 100%;
 	}
 </style>

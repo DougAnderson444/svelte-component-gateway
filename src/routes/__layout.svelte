@@ -1,6 +1,6 @@
-<!-- <script>
-	// import '../app.css';
-</script> -->
+<script>
+	import '../app.css';
+</script>
 
 <svelte:head>
 	<script src="https://cdn.tailwindcss.com"></script>
