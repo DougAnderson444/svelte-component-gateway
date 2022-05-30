@@ -1,21 +1,20 @@
 <script>
-	import { UPDATED } from './constants.js';
+	import { connectToParent } from 'penpal';
+	import { onMount } from 'svelte';
 
 	export let offsetWidth;
 	export let offsetHeight;
 
-	let component;
+	let component; // the esModule component to be mounted in this gateway
+	let parent; // iframe parent, using penpal library
+	let url;
 
-	// <!-- Turn the string into actual javascript code -->
-	// <!--   import (url) <- ObjectURL <- Blob         -->
-
-	async function handleMessage(event) {
-		const { esModule, props } = event.data;
-		// <!-- type: 'text/javascript would normally come from response headers -->
+	async function loadEsModuleComponent({ esModule, props }) {
 		const blob = new Blob([esModule], { type: 'text/javascript' });
-		const url = URL.createObjectURL(blob);
+		url = URL.createObjectURL(blob);
 
 		import(url).then(function ({ default: App }) {
+			if (!App) return;
 			if (component) component.$destroy();
 
 			document.getElementById('app').innerHTML = '';
@@ -24,14 +23,39 @@
 				props: { ...props }
 			});
 
-			// URL.revokeObjectURL(url) // memory management
-			window.parent.postMessage(UPDATED, window.parent);
+			// Pass props message up to iframe parent so it can be saved/updated
+			component.$on('change', (event) => {
+				console.log('change', event);
+				parent.updateProps(event.detail);
+			});
+
+			URL.revokeObjectURL(url); // memory management
+
+			// let parent know that the component is ready
+			parent.setSerializedSource();
 		});
 	}
+
+	onMount(async () => {
+		const connection = connectToParent({
+			// Methods child is exposing to parent.
+			methods: {
+				loadEsModuleComponent
+			}
+		});
+
+		parent = await connection.promise;
+
+		// destroy svelte component on onDestroy
+		return () => {
+			if (component) component.$destroy();
+			if (url) URL.revokeObjectURL(url); // memory management
+		};
+	});
 </script>
 
-<svelte:window on:message={handleMessage} />
-
+<!-- offsetHeight are readonly -->
+<!-- to set the width, use style  -->
 <div id="app" bind:offsetWidth bind:offsetHeight>
 	<!-- Component will be mounted into here  -->
 </div>
