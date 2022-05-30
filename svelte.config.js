@@ -9,7 +9,11 @@ function toExit() {
 	if (server) server.kill(0);
 }
 
-let server = spawn('rollup', ['-cw'], {
+// -c : compile only
+// -cw compile and watch for file changes during development
+const args = process.env.NODE_ENV === 'development' ? '-cw' : '-c';
+
+let server = spawn('rollup', [args], {
 	stdio: ['ignore', 'inherit', 'inherit'],
 	shell: true
 });
@@ -31,7 +35,10 @@ const config = {
 			// change below to your repo name
 			base: process.env.NODE_ENV === 'development' ? '' : '/svelte-component-gateway'
 		},
-
+		package: {
+			exports: (file) => file == 'index.js'
+			// files: (file) => file == 'Gateway.svelte'
+		},
 		vite: {
 			// plugins:[{
 			// 	inlineSvelte('./src/srcdoc/generated.html'),
