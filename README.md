@@ -10,8 +10,63 @@ This gateway will render the component and add the props so you can chekc it out
 
 ## TODO
 
-- [ ] Lots to do:
-- [ ] Pass in props in a variable way
+- [x] Pass in props in a variable way
 - [ ] Pass in props according to Component props schema?
-- [ ] Sandbox the iframe for untrusted code execution
-- [ ] Fetch improvements
+- [x] Sandbox the iframe for untrusted code execution
+- [ ] Fetch improvements (Axios?)
+
+## API
+
+Use the Gateway in your mini-apps:
+
+\*using Svelte to generate a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent)
+
+```js
+// YourApp.svelte
+
+import { Gateway, CHANGE } from 'svelte-component-gateway'
+
+// emit props on the CONSTANTS. CHANGE  variable
+<script>
+	import { createEventDispatcher } from 'svelte';
+
+    // props
+    export let count = 0
+
+	const dispatch = createEventDispatcher();
+
+    // emits count to consumers of
+    // <Gateway on:change={handleCountChange} />
+    function handleClick(event){
+        dispatch(CHANGE, count)
+    }
+</script>
+
+<Gateway esModule={ExampleComponent} on:click={handleClick} />
+
+```
+
+## Vanilla JS
+
+```js
+// yourscript.js
+
+import { ExampleComponent } from ' some-Component-library'
+import { Gateway, CHANGE } from 'svelte-component-gateway'
+
+const gateway = new Gateway({
+    target: document.getElementById('app'),
+	props: {
+		// assuming App.svelte contains something like
+		// `export let answer`:
+		esModule: ExampleComponent
+})
+
+gateway.$on('change',
+    event => {
+        // save them somewhere?
+        console.log("The following properties changed: ", event.detail)
+        }
+)
+
+```
