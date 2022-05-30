@@ -300,6 +300,11 @@ function set_style(node, key, value, important) {
     node.style.setProperty(key, value, important ? "important" : "");
   }
 }
+function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
+  const e = document.createEvent("CustomEvent");
+  e.initCustomEvent(type, bubbles, cancelable, detail);
+  return e;
+}
 function query_selector_all(selector, parent = document.body) {
   return Array.from(parent.querySelectorAll(selector));
 }
@@ -317,6 +322,20 @@ function onMount(fn) {
 }
 function afterUpdate(fn) {
   get_current_component().$$.after_update.push(fn);
+}
+function createEventDispatcher() {
+  const component = get_current_component();
+  return (type, detail, { cancelable = false } = {}) => {
+    const callbacks = component.$$.callbacks[type];
+    if (callbacks) {
+      const event = custom_event(type, detail, { cancelable });
+      callbacks.slice().forEach((fn) => {
+        fn.call(component, event);
+      });
+      return !event.defaultPrevented;
+    }
+    return true;
+  };
 }
 function setContext(key, context) {
   get_current_component().$$.context.set(key, context);
@@ -426,6 +445,7 @@ function transition_out(block, local, detach2, callback) {
     block.o(local);
   }
 }
+const globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : global;
 function get_spread_update(levels, updates) {
   const update2 = {};
   const to_null_out = {};
@@ -583,5 +603,5 @@ class SvelteComponent {
     }
   }
 }
-export { SvelteComponent, add_flush_callback, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_text, component_subscribe, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, query_selector_all, safe_not_equal, setContext, set_data, set_input_value, set_style, space, src_url_equal, text, tick, transition_in, transition_out, update_slot_base };
-//# sourceMappingURL=index-db8e7457.js.map
+export { SvelteComponent, add_flush_callback, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_text, component_subscribe, createEventDispatcher, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, globals, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, query_selector_all, run_all, safe_not_equal, setContext, set_data, set_input_value, set_style, space, src_url_equal, text, tick, transition_in, transition_out, update_slot_base };
+//# sourceMappingURL=index-2b231d21.js.map
