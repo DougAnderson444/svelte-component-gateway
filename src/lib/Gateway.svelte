@@ -1,50 +1,39 @@
 <script>
 	import IFrame from './IFrame.svelte';
-	// import srcdoc from './srcdoc/index.html?raw';
 	import srcdoc from './srcdoc/bundled.html?raw';
 	import { CHANGE } from './iframeSrc/constants.js';
-	import { connectToChild } from 'penpal';
 	import { createEventDispatcher } from 'svelte';
 
 	export let esModule; // TODO: Handle error if not found
 	export let props; // the consumer of this <Gateway bind:props /> component should bind the props to get updates
-	export let serializedSource;
+	export let rendered;
 
 	let iframe;
-	let child; // iframe child, using penpal library
 
 	const dispatch = createEventDispatcher();
 
 	// this fires when props change; emits an event to update any listeners consuming this compiled component
 	$: if (props) dispatch(CHANGE, props);
 
-	// $: esModule && load({ esModule, props });
 	$: iframe && iframe.addEventListener('load', handleLoad);
 
 	// Wait for the iframe to load, then configure it
-	const handleLoad = async () => {
+	async function handleLoad() {
 		if (!esModule) throw new Error('Missing esModule');
 
-		// This is where the magic begins.
-		const connection = connectToChild({
-			// The iframe to which a connection should be made.
-			iframe,
-			// Methods the parent is exposing to the iframe child.
-			methods: {
-				updateProps(newProps) {
-					props = { ...props, ...newProps }; // assign the props to the props object, overwriting as necessary
-				},
-				setSerializedSource() {
-					// alternatively, we could pass the content in through an argument
-					// but this way we can check up on untrusted code
-					serializedSource = new XMLSerializer().serializeToString(iframe?.contentWindow.document);
-				}
-			}
-		});
+		const channel = new MessageChannel();
 
-		child = await connection.promise;
-		child.loadEsModuleComponent({ esModule, props });
-	};
+		channel.port1.onmessage = (e) => {
+			props = { ...props, ...e.data }; // update props on any reply from child
+			rendered = true;
+		};
+
+		iframe.contentWindow.postMessage(
+			{ esModule, props }, // push the details to loadEsModuleComponent({ esModule, props }) in the iframe
+			'*', // there's only 1 contentWindow on the iframe so it' safe to use '*' as origin
+			[channel.port2]
+		); // enables the iframe to send messages containing prop updates back to the parent
+	}
 </script>
 
-<IFrame bind:iframe {srcdoc} {serializedSource} />
+<IFrame bind:iframe {srcdoc} {rendered} />
