@@ -28,8 +28,5 @@
 		"svelte2tsx": "^0.5.10",
 		"typescript": "^4.7.2"
 	},
-	"type": "module",
-	"dependencies": {
-		"penpal": "^6.2.2"
-	}
+	"type": "module"
 }
