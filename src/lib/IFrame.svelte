@@ -1,17 +1,18 @@
 <script>
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox
 	export let iframe;
 	export let srcdoc;
-	export let serializedSource;
+	export let rendered;
 </script>
 
 <div class="iframe-container">
 	<div class="header">
-		{#if !serializedSource}
+		{#if !rendered}
 			Rendering...
 		{/if}
 	</div>
 	<div class="iframe-inner">
-		<iframe title="Rendered Component" bind:this={iframe} {srcdoc} />
+		<iframe sandbox="allow-scripts" title="Rendered Component" bind:this={iframe} {srcdoc} />
 	</div>
 </div>
 
