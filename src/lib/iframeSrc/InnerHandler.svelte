@@ -1,13 +1,21 @@
 <script>
-	import { connectToParent } from 'penpal';
-	import { onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
+	import './preventNetworkCalls.js';
 
 	export let offsetWidth;
 	export let offsetHeight;
 
 	let component; // the esModule component to be mounted in this gateway
-	let parent; // iframe parent, using penpal library
 	let url;
+	let reply;
+
+	async function handleMessage(event) {
+		const { esModule, props } = event.data;
+		reply = (resp) => {
+			event.ports[0].postMessage(resp);
+		};
+		loadEsModuleComponent({ esModule, props });
+	}
 
 	async function loadEsModuleComponent({ esModule, props }) {
 		const blob = new Blob([esModule], { type: 'text/javascript' });
@@ -23,36 +31,25 @@
 				props: { ...props }
 			});
 
-			// Pass props message up to iframe parent so it can be saved/updated
+			console.log({ ...component }); // accessors?
+			reply(...component); // trigger "rendered" in Gateway, plus push any default values to the db to save
+
+			// on change, Pass props message up to iframe parent so it can be saved/updated
 			component.$on('change', (event) => {
-				console.log('change', event);
-				parent.updateProps(event.detail);
+				reply(event.detail);
 			});
 
 			URL.revokeObjectURL(url); // memory management
-
-			// let parent know that the component is ready
-			parent.setSerializedSource();
 		});
 	}
 
-	onMount(async () => {
-		const connection = connectToParent({
-			// Methods child is exposing to parent.
-			methods: {
-				loadEsModuleComponent
-			}
-		});
-
-		parent = await connection.promise;
-
-		// destroy svelte component on onDestroy
-		return () => {
-			if (component) component.$destroy();
-			if (url) URL.revokeObjectURL(url); // memory management
-		};
+	onDestroy(() => {
+		if (component) component.$destroy();
+		if (url) URL.revokeObjectURL(url); // memory management
 	});
 </script>
+
+<svelte:window on:message={handleMessage} />
 
 <!-- offsetHeight are readonly -->
 <!-- to set the width, use style  -->
