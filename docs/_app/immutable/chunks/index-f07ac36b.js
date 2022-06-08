@@ -300,7 +300,7 @@ function set_style(node, key, value, important) {
     node.style.setProperty(key, value, important ? "important" : "");
   }
 }
-function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
+function custom_event(type, detail, { bubbles = false, cancelable = false }) {
   const e = document.createEvent("CustomEvent");
   e.initCustomEvent(type, bubbles, cancelable, detail);
   return e;
@@ -604,4 +604,4 @@ class SvelteComponent {
   }
 }
 export { SvelteComponent, add_flush_callback, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_text, component_subscribe, createEventDispatcher, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, globals, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, query_selector_all, run_all, safe_not_equal, setContext, set_data, set_input_value, set_style, space, src_url_equal, text, tick, transition_in, transition_out, update_slot_base };
-//# sourceMappingURL=index-2b231d21.js.map
+//# sourceMappingURL=index-f07ac36b.js.map

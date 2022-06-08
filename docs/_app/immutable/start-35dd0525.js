@@ -29,7 +29,7 @@ var __objRest = (source, exclude) => {
     }
   return target;
 };
-import { safe_not_equal, noop, SvelteComponent, init, element, claim_element, children, detach, attr, set_style, insert_hydration, text, claim_text, set_data, space, empty, claim_space, group_outros, transition_out, check_outros, transition_in, setContext, afterUpdate, onMount, create_component, claim_component, mount_component, get_spread_update, get_spread_object, destroy_component, assign, tick } from "./chunks/index-2b231d21.js";
+import { safe_not_equal, noop, SvelteComponent, init, element, claim_element, children, detach, attr, set_style, insert_hydration, text, claim_text, set_data, space, empty, claim_space, group_outros, transition_out, check_outros, transition_in, setContext, afterUpdate, onMount, create_component, claim_component, mount_component, get_spread_update, get_spread_object, destroy_component, assign, tick } from "./chunks/index-f07ac36b.js";
 const subscriber_queue = [];
 function writable(value, start2 = noop) {
   let stop;
@@ -780,7 +780,7 @@ class Root extends SvelteComponent {
 }
 const scriptRel = "modulepreload";
 const seen = {};
-const base = "/svelte-component-gateway/_app/";
+const base = "/svelte-component-gateway/_app/immutable/";
 const __vitePreload = function preload(baseModule, deps) {
   if (!deps || deps.length === 0) {
     return baseModule();
@@ -813,9 +813,9 @@ const __vitePreload = function preload(baseModule, deps) {
 };
 const matchers = {};
 const components = [
-  () => __vitePreload(() => import("./pages/__layout.svelte-cb873cd7.js"), true ? ["pages/__layout.svelte-cb873cd7.js","assets/pages/__layout.svelte-5621f558.css","chunks/index-2b231d21.js"] : void 0),
-  () => __vitePreload(() => import("./error.svelte-ff3b6cd7.js"), true ? ["error.svelte-ff3b6cd7.js","chunks/index-2b231d21.js"] : void 0),
-  () => __vitePreload(() => import("./pages/index.svelte-ec3136ab.js"), true ? ["pages/index.svelte-ec3136ab.js","assets/pages/index.svelte-08a850f2.css","chunks/index-2b231d21.js"] : void 0)
+  () => __vitePreload(() => import("./pages/__layout.svelte-8ba0f218.js"), true ? ["pages/__layout.svelte-8ba0f218.js","assets/pages/__layout.svelte-5621f558.css","chunks/index-f07ac36b.js"] : void 0),
+  () => __vitePreload(() => import("./error.svelte-92a5bc8c.js"), true ? ["error.svelte-92a5bc8c.js","chunks/index-f07ac36b.js"] : void 0),
+  () => __vitePreload(() => import("./pages/index.svelte-b982c6d9.js"), true ? ["pages/index.svelte-b982c6d9.js","assets/pages/index.svelte-08a850f2.css","chunks/index-f07ac36b.js"] : void 0)
 ];
 const dictionary = {
   "": [[0, 2], [1]]
@@ -851,24 +851,15 @@ function normalize(loaded) {
   }
   if (loaded.redirect) {
     if (!loaded.status || Math.floor(loaded.status / 100) !== 3) {
-      return {
-        status: 500,
-        error: new Error('"redirect" property returned from load() must be accompanied by a 3xx status code')
-      };
+      throw new Error('"redirect" property returned from load() must be accompanied by a 3xx status code');
     }
     if (typeof loaded.redirect !== "string") {
-      return {
-        status: 500,
-        error: new Error('"redirect" property returned from load() must be a string')
-      };
+      throw new Error('"redirect" property returned from load() must be a string');
     }
   }
   if (loaded.dependencies) {
     if (!Array.isArray(loaded.dependencies) || loaded.dependencies.some((dep) => typeof dep !== "string")) {
-      return {
-        status: 500,
-        error: new Error('"dependencies" property returned from load() must be of type string[]')
-      };
+      throw new Error('"dependencies" property returned from load() must be of type string[]');
     }
   }
   if (loaded.context) {
@@ -885,18 +876,6 @@ function normalize_path(path, trailing_slash) {
     return path + "/";
   }
   return path;
-}
-function hash(value) {
-  let hash2 = 5381;
-  let i = value.length;
-  if (typeof value === "string") {
-    while (i)
-      hash2 = hash2 * 33 ^ value.charCodeAt(--i);
-  } else {
-    while (i)
-      hash2 = hash2 * 33 ^ value[--i];
-  }
-  return (hash2 >>> 0).toString(36);
 }
 function get_base_uri(doc) {
   let baseURI = doc.baseURI;
@@ -942,7 +921,7 @@ function notifiable_store(value) {
 }
 function create_updated_store() {
   const { set, subscribe } = writable(false);
-  const initial = "1653905894207";
+  const initial = "1654711872680";
   let timeout;
   async function check() {
     clearTimeout(timeout);
@@ -970,6 +949,19 @@ function create_updated_store() {
     check
   };
 }
+function hash(value) {
+  let hash2 = 5381;
+  let i = value.length;
+  if (typeof value === "string") {
+    while (i)
+      hash2 = hash2 * 33 ^ value.charCodeAt(--i);
+  } else {
+    while (i)
+      hash2 = hash2 * 33 ^ value[--i];
+  }
+  return (hash2 >>> 0).toString(36);
+}
+const native_fetch = window.fetch;
 function initial_fetch(resource, opts) {
   const url = JSON.stringify(typeof resource === "string" ? resource : resource.url);
   let selector = `script[sveltekit\\:data-type="data"][sveltekit\\:data-url=${url}]`;
@@ -981,7 +973,7 @@ function initial_fetch(resource, opts) {
     const _a = JSON.parse(script.textContent), { body } = _a, init2 = __objRest(_a, ["body"]);
     return Promise.resolve(new Response(body, init2));
   }
-  return fetch(resource, opts);
+  return native_fetch(resource, opts);
 }
 const param_pattern = /^(\.\.\.)?(\w+)(?:=(\w+))?$/;
 function parse_route_id(id) {
@@ -1143,7 +1135,7 @@ function create_client({ target, session, base: base2, trailing_slash }) {
     load_cache.id = intent.id;
     return load_cache.promise;
   }
-  async function update(url, redirect_chain, no_cache, opts) {
+  async function update(url, redirect_chain, no_cache, opts, callback) {
     var _a2, _b, _c;
     const intent = get_navigation_intent(url);
     const current_token = token = {};
@@ -1197,6 +1189,9 @@ function create_client({ target, session, base: base2, trailing_slash }) {
     }
     if (started) {
       current = navigation_result.state;
+      if (navigation_result.props.page) {
+        navigation_result.props.page.url = url;
+      }
       root.$set(navigation_result.props);
     } else {
       initialize(navigation_result);
@@ -1232,13 +1227,14 @@ function create_client({ target, session, base: base2, trailing_slash }) {
     load_cache.promise = null;
     load_cache.id = null;
     autoscroll = true;
-    updating = false;
     if (navigation_result.props.page) {
       page = navigation_result.props.page;
     }
     const leaf_node = navigation_result.state.branch[navigation_result.state.branch.length - 1];
     router_enabled = (leaf_node == null ? void 0 : leaf_node.module.router) !== false;
-    return true;
+    if (callback)
+      callback();
+    updating = false;
   }
   function initialize(result) {
     current = result.state;
@@ -1251,11 +1247,11 @@ function create_client({ target, session, base: base2, trailing_slash }) {
       props: __spreadProps(__spreadValues({}, result.props), { stores }),
       hydrate: true
     });
-    started = true;
     if (router_enabled) {
       const navigation = { from: null, to: new URL(location.href) };
       callbacks.after_navigate.forEach((fn) => fn(navigation));
     }
+    started = true;
   }
   async function get_navigation_result_from_branch({
     url,
@@ -1364,7 +1360,14 @@ function create_client({ target, session, base: base2, trailing_slash }) {
         props: props || {},
         get url() {
           node.uses.url = true;
-          return url;
+          return new Proxy(url, {
+            get: (target2, property) => {
+              if (property === "hash") {
+                throw new Error("url.hash is inaccessible from load. Consider accessing hash from the page store within the script tag of your component.");
+              }
+              return Reflect.get(target2, property, target2);
+            }
+          });
         },
         get session() {
           node.uses.session = true;
@@ -1374,15 +1377,38 @@ function create_client({ target, session, base: base2, trailing_slash }) {
           node.uses.stuff = true;
           return __spreadValues({}, stuff);
         },
-        fetch(resource, info) {
-          const requested = typeof resource === "string" ? resource : resource.url;
-          add_dependency(requested);
-          return started ? fetch(resource, info) : initial_fetch(resource, info);
+        async fetch(resource, init2) {
+          let requested;
+          if (typeof resource === "string") {
+            requested = resource;
+          } else {
+            requested = resource.url;
+            init2 = __spreadValues({
+              body: resource.method === "GET" || resource.method === "HEAD" ? void 0 : await resource.blob(),
+              cache: resource.cache,
+              credentials: resource.credentials,
+              headers: resource.headers,
+              integrity: resource.integrity,
+              keepalive: resource.keepalive,
+              method: resource.method,
+              mode: resource.mode,
+              redirect: resource.redirect,
+              referrer: resource.referrer,
+              referrerPolicy: resource.referrerPolicy,
+              signal: resource.signal
+            }, init2);
+          }
+          const normalized = new URL(requested, url).href;
+          add_dependency(normalized);
+          return started ? native_fetch(normalized, init2) : initial_fetch(requested, init2);
         },
         status: status != null ? status : null,
         error: error != null ? error : null
       };
-      const loaded = await module.load.call(null, load_input);
+      let loaded;
+      {
+        loaded = await module.load.call(null, load_input);
+      }
       if (!loaded) {
         throw new Error("load function must return a value");
       }
@@ -1433,7 +1459,7 @@ function create_client({ target, session, base: base2, trailing_slash }) {
             let props = {};
             const is_shadow_page = has_shadow && i === a.length - 1;
             if (is_shadow_page) {
-              const res = await fetch(`${url.pathname}${url.pathname.endsWith("/") ? "" : "/"}__data.json${url.search}`, {
+              const res = await native_fetch(`${url.pathname}${url.pathname.endsWith("/") ? "" : "/"}__data.json${url.search}`, {
                 headers: {
                   "x-sveltekit-load": "true"
                 }
@@ -1615,16 +1641,15 @@ function create_client({ target, session, base: base2, trailing_slash }) {
         to: normalized
       });
     }
-    const completed = await update(normalized, redirect_chain, false, {
+    await update(normalized, redirect_chain, false, {
       scroll: scroll2,
       keepfocus,
       details
-    });
-    if (completed) {
+    }, () => {
       const navigation2 = { from, to: normalized };
       callbacks.after_navigate.forEach((fn) => fn(navigation2));
       stores.navigating.set(null);
-    }
+    });
   }
   function native_navigation(url) {
     location.href = url.href;
@@ -1812,7 +1837,7 @@ function create_client({ target, session, base: base2, trailing_slash }) {
             }
           }
           const node = await load_node({
-            module: await nodes[i],
+            module: await components[nodes[i]](),
             url,
             params,
             stuff,
@@ -1886,4 +1911,4 @@ async function start({ paths, target, session, route, spa, trailing_slash, hydra
   dispatchEvent(new CustomEvent("sveltekit:start"));
 }
 export { start };
-//# sourceMappingURL=start-152b918d.js.map
+//# sourceMappingURL=start-35dd0525.js.map
