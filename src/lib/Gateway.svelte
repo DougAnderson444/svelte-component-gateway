@@ -8,24 +8,28 @@
 	export let props; // the consumer of this <Gateway bind:props /> component should bind the props to get updates
 	export let rendered;
 
+	// refresh/reload when esModule changes
+	$: if (esModule && iframe) handleLoad();
+
 	let iframe;
 
 	const dispatch = createEventDispatcher();
 
 	// this fires when props change; emits an event to update any listeners consuming this compiled component
-	$: if (props) dispatch(CHANGE, props);
+	// $: if (props) dispatch(CHANGE, props);
 
 	$: iframe && iframe.addEventListener('load', handleLoad);
 
 	// Wait for the iframe to load, then configure it
 	async function handleLoad() {
-		if (!esModule) throw new Error('Missing esModule');
+		if (!esModule || !iframe) throw new Error('Missing esModule');
 
 		const channel = new MessageChannel();
 
 		channel.port1.onmessage = (e) => {
 			props = { ...props, ...e.data }; // update props on any reply from child
 			rendered = true;
+			dispatch(CHANGE, props); // this fires when props change; emits an event to update any listeners consuming this compiled component
 		};
 
 		iframe.contentWindow.postMessage(
