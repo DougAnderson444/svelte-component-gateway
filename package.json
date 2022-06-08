@@ -1,5 +1,5 @@
 {
-	"name": "svelte-component-gateway",
+	"name": "@douganderson444/svelte-component-gateway",
 	"version": "0.0.5",
 	"scripts": {
 		"dev": "svelte-kit dev --port 6699",
