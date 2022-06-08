@@ -14,7 +14,7 @@ This gateway will render the component and add the props so you can chekc it out
 - [ ] Pass in props according to Component props schema?
 - [ ] Fetch improvements (Axios?)
 
-### iFrame TODO
+## iFrame TODO
 
 - [x] Sandbox the iframe for untrusted code execution
 - [x] Prevent fetch
