@@ -12,8 +12,21 @@ This gateway will render the component and add the props so you can chekc it out
 
 - [x] Pass in props in a variable way
 - [ ] Pass in props according to Component props schema?
-- [x] Sandbox the iframe for untrusted code execution
 - [ ] Fetch improvements (Axios?)
+
+### iFrame TODO
+
+- [x] Sandbox the iframe for untrusted code execution
+- [x] Prevent fetch
+- [x] Prevent XMLHttpRequest
+- [x] Prevent WebSocket
+- [x] Prevent EventSource
+
+- [ ] Prevent adding iframes to the iframe
+- [ ] Prevent href anchors with searchParams
+- [ ] Prevent all encodings (base64, unicode) injections
+- [ ] Prevent re-adding the fetch API (is this even possible?)
+- [ ] Check for eval?
 
 ## API
 
@@ -37,12 +50,12 @@ import { Gateway, CHANGE } from 'svelte-component-gateway'
 
     // emits count to consumers of
     // <Gateway on:change={handleCountChange} />
-    function handleClick(event){
+    function handleChange(event){
         dispatch(CHANGE, count)
     }
 </script>
 
-<Gateway esModule={ExampleComponent} on:click={handleClick} />
+<Gateway esModule={ExampleComponent} on:change={handleChange} />
 
 ```
 
