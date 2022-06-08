@@ -7,14 +7,21 @@
 
 	let component;
 
-	let props = { name: 'Douglas' };
+	let props = {
+		name: 'Doug',
+		lastName: 'Anders'
+	};
 
 	let width;
 	let height;
 	let vh;
+	let mounted = false;
 
 	onMount(() => {
+		mounted = true;
 		url = $page.url.searchParams.get('url') || url;
+		window.cachedURL = url;
+		doFetch(url);
 		handleViewportSize();
 	});
 
@@ -24,14 +31,17 @@
 		width = document?.body.clientWidth; // excludes scrollbar
 	}
 
-	$: if (url) doFetch(url);
+	$: if (mounted && url && window.cachedURL != url) doFetch(url);
 
 	let fetched;
 
 	async function doFetch(url) {
 		try {
+			console.log('fetching', url);
 			fetched = await fetch(url);
 			const text = await fetched.text();
+			console.log('fetched:', { text });
+
 			component = text;
 		} catch (error) {
 			console.log(error);
@@ -44,7 +54,7 @@
 <div class="app" style="--vh: {vh}px; height: calc(var(--vh, 1vh) * 100);">
 	<h1 class="text-3xl font-bold py-2">Svelte Component Gateway</h1>
 	<p class="my-2">
-		Loading from // make form input with url default
+		Loading from<br />
 		<input type="text" name="url" bind:value={url} size="90" class="border p-2" />
 		<a href={url} target="_blank" class="underline text-blue-400">{url}</a>
 	</p>
