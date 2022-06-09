@@ -14,7 +14,7 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-import { SvelteComponent, init, safe_not_equal, text, claim_text, insert_hydration, detach, element, space, claim_element, children, claim_space, attr, append_hydration, noop, binding_callbacks, bind, create_component, claim_component, mount_component, add_flush_callback, transition_in, transition_out, destroy_component, createEventDispatcher, getContext, set_style, set_input_value, listen, set_data, check_outros, run_all, component_subscribe, onMount, globals, group_outros } from "../chunks/index-f07ac36b.js";
+import { SvelteComponent, init, safe_not_equal, text, claim_text, insert_hydration, detach, element, space, claim_element, children, claim_space, attr, append_hydration, noop, binding_callbacks, bind, create_component, claim_component, mount_component, add_flush_callback, transition_in, transition_out, destroy_component, createEventDispatcher, getContext, create_slot, query_selector_all, src_url_equal, set_input_value, listen, set_data, update_slot_base, get_all_dirty_from_scope, get_slot_changes, component_subscribe, onMount, set_style, globals, group_outros, check_outros } from "../chunks/index-44bcea44.js";
 var IFrame_svelte_svelte_type_style_lang = "";
 function create_if_block$1(ctx) {
   let t;
@@ -34,7 +34,7 @@ function create_if_block$1(ctx) {
     }
   };
 }
-function create_fragment$2(ctx) {
+function create_fragment$3(ctx) {
   let div2;
   let div0;
   let t;
@@ -121,7 +121,7 @@ function create_fragment$2(ctx) {
     }
   };
 }
-function instance$2($$self, $$props, $$invalidate) {
+function instance$3($$self, $$props, $$invalidate) {
   let { iframe } = $$props;
   let { srcdoc: srcdoc2 } = $$props;
   let { rendered } = $$props;
@@ -144,7 +144,7 @@ function instance$2($$self, $$props, $$invalidate) {
 class IFrame extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance$2, create_fragment$2, safe_not_equal, { iframe: 0, srcdoc: 1, rendered: 2 });
+    init(this, options, instance$3, create_fragment$3, safe_not_equal, { iframe: 0, srcdoc: 1, rendered: 2 });
   }
 }
 var srcdoc = `<!DOCTYPE html>
@@ -163,7 +163,7 @@ var srcdoc = `<!DOCTYPE html>
 </html>
 `;
 const CHANGE = "change";
-function create_fragment$1(ctx) {
+function create_fragment$2(ctx) {
   let iframe_1;
   let updating_iframe;
   let current;
@@ -213,7 +213,7 @@ function create_fragment$1(ctx) {
     }
   };
 }
-function instance$1($$self, $$props, $$invalidate) {
+function instance$2($$self, $$props, $$invalidate) {
   let { esModule } = $$props;
   let { props } = $$props;
   let { rendered } = $$props;
@@ -256,7 +256,7 @@ function instance$1($$self, $$props, $$invalidate) {
 class Gateway extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance$1, create_fragment$1, safe_not_equal, { esModule: 3, props: 2, rendered: 0 });
+    init(this, options, instance$2, create_fragment$2, safe_not_equal, { esModule: 3, props: 2, rendered: 0 });
   }
 }
 const getStores = () => {
@@ -284,6 +284,207 @@ const page = {
     return store.subscribe(fn);
   }
 };
+const get_default_slot_changes = (dirty) => ({ component: dirty & 2 });
+const get_default_slot_context = (ctx) => ({ component: ctx[1] });
+function create_fragment$1(ctx) {
+  let p;
+  let t0;
+  let br;
+  let t1;
+  let input;
+  let t2;
+  let a;
+  let t3;
+  let t4;
+  let t5;
+  let script;
+  let script_src_value;
+  let link;
+  let current;
+  let mounted;
+  let dispose;
+  const default_slot_template = ctx[4].default;
+  const default_slot = create_slot(default_slot_template, ctx, ctx[3], get_default_slot_context);
+  return {
+    c() {
+      p = element("p");
+      t0 = text("Loading from");
+      br = element("br");
+      t1 = space();
+      input = element("input");
+      t2 = space();
+      a = element("a");
+      t3 = text(ctx[0]);
+      t4 = space();
+      if (default_slot)
+        default_slot.c();
+      t5 = space();
+      script = element("script");
+      link = element("link");
+      this.h();
+    },
+    l(nodes) {
+      p = claim_element(nodes, "P", { class: true });
+      var p_nodes = children(p);
+      t0 = claim_text(p_nodes, "Loading from");
+      br = claim_element(p_nodes, "BR", {});
+      t1 = claim_space(p_nodes);
+      input = claim_element(p_nodes, "INPUT", {
+        type: true,
+        name: true,
+        size: true,
+        class: true
+      });
+      t2 = claim_space(p_nodes);
+      a = claim_element(p_nodes, "A", { href: true, target: true, class: true });
+      var a_nodes = children(a);
+      t3 = claim_text(a_nodes, ctx[0]);
+      a_nodes.forEach(detach);
+      p_nodes.forEach(detach);
+      t4 = claim_space(nodes);
+      if (default_slot)
+        default_slot.l(nodes);
+      t5 = claim_space(nodes);
+      const head_nodes = query_selector_all('[data-svelte="svelte-bpeq2r"]', document.head);
+      script = claim_element(head_nodes, "SCRIPT", { src: true });
+      var script_nodes = children(script);
+      script_nodes.forEach(detach);
+      link = claim_element(head_nodes, "LINK", { href: true, rel: true });
+      head_nodes.forEach(detach);
+      this.h();
+    },
+    h() {
+      attr(input, "type", "text");
+      attr(input, "name", "url");
+      attr(input, "size", "90");
+      attr(input, "class", "border p-2");
+      attr(a, "href", ctx[0]);
+      attr(a, "target", "_blank");
+      attr(a, "class", "underline text-blue-400");
+      attr(p, "class", "my-2");
+      if (!src_url_equal(script.src, script_src_value = "https://cdn.tailwindcss.com"))
+        attr(script, "src", script_src_value);
+      attr(link, "href", "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css");
+      attr(link, "rel", "stylesheet");
+    },
+    m(target, anchor) {
+      insert_hydration(target, p, anchor);
+      append_hydration(p, t0);
+      append_hydration(p, br);
+      append_hydration(p, t1);
+      append_hydration(p, input);
+      set_input_value(input, ctx[0]);
+      append_hydration(p, t2);
+      append_hydration(p, a);
+      append_hydration(a, t3);
+      insert_hydration(target, t4, anchor);
+      if (default_slot) {
+        default_slot.m(target, anchor);
+      }
+      insert_hydration(target, t5, anchor);
+      append_hydration(document.head, script);
+      append_hydration(document.head, link);
+      current = true;
+      if (!mounted) {
+        dispose = listen(input, "input", ctx[5]);
+        mounted = true;
+      }
+    },
+    p(ctx2, [dirty]) {
+      if (dirty & 1 && input.value !== ctx2[0]) {
+        set_input_value(input, ctx2[0]);
+      }
+      if (!current || dirty & 1)
+        set_data(t3, ctx2[0]);
+      if (!current || dirty & 1) {
+        attr(a, "href", ctx2[0]);
+      }
+      if (default_slot) {
+        if (default_slot.p && (!current || dirty & 10)) {
+          update_slot_base(default_slot, default_slot_template, ctx2, ctx2[3], !current ? get_all_dirty_from_scope(ctx2[3]) : get_slot_changes(default_slot_template, ctx2[3], dirty, get_default_slot_changes), get_default_slot_context);
+        }
+      }
+    },
+    i(local) {
+      if (current)
+        return;
+      transition_in(default_slot, local);
+      current = true;
+    },
+    o(local) {
+      transition_out(default_slot, local);
+      current = false;
+    },
+    d(detaching) {
+      if (detaching)
+        detach(p);
+      if (detaching)
+        detach(t4);
+      if (default_slot)
+        default_slot.d(detaching);
+      if (detaching)
+        detach(t5);
+      detach(script);
+      detach(link);
+      mounted = false;
+      dispose();
+    }
+  };
+}
+function instance$1($$self, $$props, $$invalidate) {
+  let $page;
+  component_subscribe($$self, page, ($$value) => $$invalidate(7, $page = $$value));
+  let { $$slots: slots = {}, $$scope } = $$props;
+  let { url } = $$props;
+  let component;
+  let mounted = false;
+  onMount(() => {
+    $$invalidate(2, mounted = true);
+    $$invalidate(0, url = $page.url.searchParams.get("url") || url);
+    window.cachedURL = url;
+    doFetch(url);
+  });
+  let fetched;
+  async function doFetch(url2) {
+    if (!url2)
+      return;
+    try {
+      window.cachedURL = url2;
+      fetched = await fetch(url2);
+      if (!fetched.ok)
+        throw new Error(fetched.statusText);
+      console.log("fetching", url2, { fetched });
+      const text2 = await fetched.text();
+      console.log("fetched:", { text: text2 });
+      $$invalidate(1, component = text2);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  function input_input_handler() {
+    url = this.value;
+    $$invalidate(0, url);
+  }
+  $$self.$$set = ($$props2) => {
+    if ("url" in $$props2)
+      $$invalidate(0, url = $$props2.url);
+    if ("$$scope" in $$props2)
+      $$invalidate(3, $$scope = $$props2.$$scope);
+  };
+  $$self.$$.update = () => {
+    if ($$self.$$.dirty & 5) {
+      if (mounted && url && window.cachedURL != url)
+        doFetch(url);
+    }
+  };
+  return [url, component, mounted, $$scope, slots, input_input_handler];
+}
+class FetchComponent extends SvelteComponent {
+  constructor(options) {
+    super();
+    init(this, options, instance$1, create_fragment$1, safe_not_equal, { url: 0 });
+  }
+}
 var index_svelte_svelte_type_style_lang = "";
 const { window: window_1 } = globals;
 function create_if_block(ctx) {
@@ -291,15 +492,15 @@ function create_if_block(ctx) {
   let updating_props;
   let current;
   function gateway_props_binding(value) {
-    ctx[9](value);
+    ctx[6](value);
   }
   let gateway_props = {
-    esModule: ctx[1],
-    width: ctx[3],
-    height: ctx[4]
+    esModule: ctx[8],
+    width: ctx[2],
+    height: ctx[3]
   };
-  if (ctx[2] !== void 0) {
-    gateway_props.props = ctx[2];
+  if (ctx[1] !== void 0) {
+    gateway_props.props = ctx[1];
   }
   gateway = new Gateway({ props: gateway_props });
   binding_callbacks.push(() => bind(gateway, "props", gateway_props_binding));
@@ -316,15 +517,15 @@ function create_if_block(ctx) {
     },
     p(ctx2, dirty) {
       const gateway_changes = {};
-      if (dirty & 2)
-        gateway_changes.esModule = ctx2[1];
+      if (dirty & 256)
+        gateway_changes.esModule = ctx2[8];
+      if (dirty & 4)
+        gateway_changes.width = ctx2[2];
       if (dirty & 8)
-        gateway_changes.width = ctx2[3];
-      if (dirty & 16)
-        gateway_changes.height = ctx2[4];
-      if (!updating_props && dirty & 4) {
+        gateway_changes.height = ctx2[3];
+      if (!updating_props && dirty & 2) {
         updating_props = true;
-        gateway_changes.props = ctx2[2];
+        gateway_changes.props = ctx2[1];
         add_flush_callback(() => updating_props = false);
       }
       gateway.$set(gateway_changes);
@@ -344,152 +545,61 @@ function create_if_block(ctx) {
     }
   };
 }
-function create_fragment(ctx) {
-  let div1;
-  let h1;
+function create_default_slot(ctx) {
   let t0;
+  let t1_value = JSON.stringify(ctx[1]) + "";
   let t1;
-  let p;
   let t2;
-  let br;
-  let t3;
-  let input;
-  let t4;
-  let a;
-  let t5;
-  let t6;
-  let t7_value = JSON.stringify(ctx[2]) + "";
-  let t7;
-  let t8;
-  let div0;
+  let div;
   let current;
-  let mounted;
-  let dispose;
-  let if_block = ctx[1] && create_if_block(ctx);
+  let if_block = ctx[8] && create_if_block(ctx);
   return {
     c() {
-      div1 = element("div");
-      h1 = element("h1");
-      t0 = text("Svelte Component Gateway");
-      t1 = space();
-      p = element("p");
-      t2 = text("Loading from");
-      br = element("br");
-      t3 = space();
-      input = element("input");
-      t4 = space();
-      a = element("a");
-      t5 = text(ctx[0]);
-      t6 = text("\n\n	Props: ");
-      t7 = text(t7_value);
-      t8 = space();
-      div0 = element("div");
+      t0 = text("Props: ");
+      t1 = text(t1_value);
+      t2 = space();
+      div = element("div");
       if (if_block)
         if_block.c();
       this.h();
     },
     l(nodes) {
-      div1 = claim_element(nodes, "DIV", { class: true, style: true });
-      var div1_nodes = children(div1);
-      h1 = claim_element(div1_nodes, "H1", { class: true });
-      var h1_nodes = children(h1);
-      t0 = claim_text(h1_nodes, "Svelte Component Gateway");
-      h1_nodes.forEach(detach);
-      t1 = claim_space(div1_nodes);
-      p = claim_element(div1_nodes, "P", { class: true });
-      var p_nodes = children(p);
-      t2 = claim_text(p_nodes, "Loading from");
-      br = claim_element(p_nodes, "BR", {});
-      t3 = claim_space(p_nodes);
-      input = claim_element(p_nodes, "INPUT", {
-        type: true,
-        name: true,
-        size: true,
-        class: true
-      });
-      t4 = claim_space(p_nodes);
-      a = claim_element(p_nodes, "A", { href: true, target: true, class: true });
-      var a_nodes = children(a);
-      t5 = claim_text(a_nodes, ctx[0]);
-      a_nodes.forEach(detach);
-      p_nodes.forEach(detach);
-      t6 = claim_text(div1_nodes, "\n\n	Props: ");
-      t7 = claim_text(div1_nodes, t7_value);
-      t8 = claim_space(div1_nodes);
-      div0 = claim_element(div1_nodes, "DIV", { class: true });
-      var div0_nodes = children(div0);
+      t0 = claim_text(nodes, "Props: ");
+      t1 = claim_text(nodes, t1_value);
+      t2 = claim_space(nodes);
+      div = claim_element(nodes, "DIV", { class: true });
+      var div_nodes = children(div);
       if (if_block)
-        if_block.l(div0_nodes);
-      div0_nodes.forEach(detach);
-      div1_nodes.forEach(detach);
+        if_block.l(div_nodes);
+      div_nodes.forEach(detach);
       this.h();
     },
     h() {
-      attr(h1, "class", "text-3xl font-bold py-2");
-      attr(input, "type", "text");
-      attr(input, "name", "url");
-      attr(input, "size", "90");
-      attr(input, "class", "border p-2");
-      attr(a, "href", ctx[0]);
-      attr(a, "target", "_blank");
-      attr(a, "class", "underline text-blue-400");
-      attr(p, "class", "my-2");
-      attr(div0, "class", "border flex-auto");
-      attr(div1, "class", "app svelte-md7319");
-      set_style(div1, "--vh", ctx[5] + "px");
-      set_style(div1, "height", "calc(var(--vh, 1vh) * 100)");
+      attr(div, "class", "border flex-auto");
     },
     m(target, anchor) {
-      insert_hydration(target, div1, anchor);
-      append_hydration(div1, h1);
-      append_hydration(h1, t0);
-      append_hydration(div1, t1);
-      append_hydration(div1, p);
-      append_hydration(p, t2);
-      append_hydration(p, br);
-      append_hydration(p, t3);
-      append_hydration(p, input);
-      set_input_value(input, ctx[0]);
-      append_hydration(p, t4);
-      append_hydration(p, a);
-      append_hydration(a, t5);
-      append_hydration(div1, t6);
-      append_hydration(div1, t7);
-      append_hydration(div1, t8);
-      append_hydration(div1, div0);
+      insert_hydration(target, t0, anchor);
+      insert_hydration(target, t1, anchor);
+      insert_hydration(target, t2, anchor);
+      insert_hydration(target, div, anchor);
       if (if_block)
-        if_block.m(div0, null);
+        if_block.m(div, null);
       current = true;
-      if (!mounted) {
-        dispose = [
-          listen(window_1, "resize", ctx[6]),
-          listen(input, "input", ctx[8])
-        ];
-        mounted = true;
-      }
     },
-    p(ctx2, [dirty]) {
-      if (dirty & 1 && input.value !== ctx2[0]) {
-        set_input_value(input, ctx2[0]);
-      }
-      if (!current || dirty & 1)
-        set_data(t5, ctx2[0]);
-      if (!current || dirty & 1) {
-        attr(a, "href", ctx2[0]);
-      }
-      if ((!current || dirty & 4) && t7_value !== (t7_value = JSON.stringify(ctx2[2]) + ""))
-        set_data(t7, t7_value);
-      if (ctx2[1]) {
+    p(ctx2, dirty) {
+      if ((!current || dirty & 2) && t1_value !== (t1_value = JSON.stringify(ctx2[1]) + ""))
+        set_data(t1, t1_value);
+      if (ctx2[8]) {
         if (if_block) {
           if_block.p(ctx2, dirty);
-          if (dirty & 2) {
+          if (dirty & 256) {
             transition_in(if_block, 1);
           }
         } else {
           if_block = create_if_block(ctx2);
           if_block.c();
           transition_in(if_block, 1);
-          if_block.m(div0, null);
+          if_block.m(div, null);
         }
       } else if (if_block) {
         group_outros();
@@ -497,9 +607,6 @@ function create_fragment(ctx) {
           if_block = null;
         });
         check_outros();
-      }
-      if (!current || dirty & 32) {
-        set_style(div1, "--vh", ctx2[5] + "px");
       }
     },
     i(local) {
@@ -514,74 +621,133 @@ function create_fragment(ctx) {
     },
     d(detaching) {
       if (detaching)
-        detach(div1);
+        detach(t0);
+      if (detaching)
+        detach(t1);
+      if (detaching)
+        detach(t2);
+      if (detaching)
+        detach(div);
       if (if_block)
         if_block.d();
+    }
+  };
+}
+function create_fragment(ctx) {
+  let div;
+  let h1;
+  let t0;
+  let t1;
+  let fetchcomponent;
+  let current;
+  let mounted;
+  let dispose;
+  fetchcomponent = new FetchComponent({
+    props: {
+      url: ctx[0],
+      $$slots: {
+        default: [
+          create_default_slot,
+          ({ component }) => ({ 8: component }),
+          ({ component }) => component ? 256 : 0
+        ]
+      },
+      $$scope: { ctx }
+    }
+  });
+  return {
+    c() {
+      div = element("div");
+      h1 = element("h1");
+      t0 = text("Svelte Component Gateway");
+      t1 = space();
+      create_component(fetchcomponent.$$.fragment);
+      this.h();
+    },
+    l(nodes) {
+      div = claim_element(nodes, "DIV", { class: true, style: true });
+      var div_nodes = children(div);
+      h1 = claim_element(div_nodes, "H1", { class: true });
+      var h1_nodes = children(h1);
+      t0 = claim_text(h1_nodes, "Svelte Component Gateway");
+      h1_nodes.forEach(detach);
+      t1 = claim_space(div_nodes);
+      claim_component(fetchcomponent.$$.fragment, div_nodes);
+      div_nodes.forEach(detach);
+      this.h();
+    },
+    h() {
+      attr(h1, "class", "text-3xl font-bold py-2");
+      attr(div, "class", "app svelte-md7319");
+      set_style(div, "--vh", ctx[4] + "px");
+      set_style(div, "height", "calc(var(--vh, 1vh) * 100)");
+    },
+    m(target, anchor) {
+      insert_hydration(target, div, anchor);
+      append_hydration(div, h1);
+      append_hydration(h1, t0);
+      append_hydration(div, t1);
+      mount_component(fetchcomponent, div, null);
+      current = true;
+      if (!mounted) {
+        dispose = listen(window_1, "resize", ctx[5]);
+        mounted = true;
+      }
+    },
+    p(ctx2, [dirty]) {
+      const fetchcomponent_changes = {};
+      if (dirty & 1)
+        fetchcomponent_changes.url = ctx2[0];
+      if (dirty & 782) {
+        fetchcomponent_changes.$$scope = { dirty, ctx: ctx2 };
+      }
+      fetchcomponent.$set(fetchcomponent_changes);
+      if (!current || dirty & 16) {
+        set_style(div, "--vh", ctx2[4] + "px");
+      }
+    },
+    i(local) {
+      if (current)
+        return;
+      transition_in(fetchcomponent.$$.fragment, local);
+      current = true;
+    },
+    o(local) {
+      transition_out(fetchcomponent.$$.fragment, local);
+      current = false;
+    },
+    d(detaching) {
+      if (detaching)
+        detach(div);
+      destroy_component(fetchcomponent);
       mounted = false;
-      run_all(dispose);
+      dispose();
     }
   };
 }
 function instance($$self, $$props, $$invalidate) {
   let $page;
-  component_subscribe($$self, page, ($$value) => $$invalidate(11, $page = $$value));
+  component_subscribe($$self, page, ($$value) => $$invalidate(7, $page = $$value));
   let url = "https://bafybeifeyoww62kxwmpdkqpqou6yxjpo7jstfxujfoxjy5exqjvldyqixu.ipfs.dweb.link";
-  let component;
   let props = { name: "Doug", lastName: "Anders" };
   let width;
   let height;
   let vh;
-  let mounted = false;
   onMount(() => {
-    $$invalidate(7, mounted = true);
     $$invalidate(0, url = $page.url.searchParams.get("url") || url);
     window.cachedURL = url;
-    doFetch(url);
     handleViewportSize();
   });
   function handleViewportSize(_) {
-    $$invalidate(5, vh = window.innerHeight * 0.01);
-    $$invalidate(4, height = window.innerHeight);
-    $$invalidate(3, width = document == null ? void 0 : document.body.clientWidth);
-  }
-  let fetched;
-  async function doFetch(url2) {
-    try {
-      console.log("fetching", url2);
-      fetched = await fetch(url2);
-      const text2 = await fetched.text();
-      console.log("fetched:", { text: text2 });
-      $$invalidate(1, component = text2);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  function input_input_handler() {
-    url = this.value;
-    $$invalidate(0, url);
+    $$invalidate(4, vh = window.innerHeight * 0.01);
+    $$invalidate(3, height = window.innerHeight);
+    $$invalidate(2, width = document == null ? void 0 : document.body.clientWidth);
   }
   function gateway_props_binding(value) {
     props = value;
-    $$invalidate(2, props);
+    $$invalidate(1, props);
   }
-  $$self.$$.update = () => {
-    if ($$self.$$.dirty & 129) {
-      if (mounted && url && window.cachedURL != url)
-        doFetch(url);
-    }
-  };
-  return [
-    url,
-    component,
-    props,
-    width,
-    height,
-    vh,
-    handleViewportSize,
-    mounted,
-    input_input_handler,
-    gateway_props_binding
-  ];
+  return [url, props, width, height, vh, handleViewportSize, gateway_props_binding];
 }
 class Routes extends SvelteComponent {
   constructor(options) {
@@ -590,4 +756,4 @@ class Routes extends SvelteComponent {
   }
 }
 export { Routes as default };
-//# sourceMappingURL=index.svelte-b982c6d9.js.map
+//# sourceMappingURL=index.svelte-7a97d56f.js.map
