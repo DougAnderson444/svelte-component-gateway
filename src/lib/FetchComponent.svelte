@@ -19,10 +19,12 @@
 	let fetched;
 
 	async function doFetch(url) {
+		if (!url) return;
 		try {
 			window.cachedURL = url; // reset cache, avoiding duplicate downloads
-			console.log('fetching', url);
 			fetched = await fetch(url);
+			if (!fetched.ok) throw new Error(fetched.statusText);
+			console.log('fetching', url, { fetched });
 			const text = await fetched.text();
 			console.log('fetched:', { text });
 
