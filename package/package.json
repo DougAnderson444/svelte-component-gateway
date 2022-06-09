@@ -1,7 +1,8 @@
 {
   "name": "@douganderson444/svelte-component-gateway",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "module": "index.js",
+  "main": "package/index.js",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
