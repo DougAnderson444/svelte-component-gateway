@@ -1,11 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import Gateway from '@douganderson444/svelte-component-gateway';
+	import Gateway, { FetchComponent } from '@douganderson444/svelte-component-gateway';
 	import { page } from '$app/stores';
 
 	let url = 'https://bafybeifeyoww62kxwmpdkqpqou6yxjpo7jstfxujfoxjy5exqjvldyqixu.ipfs.dweb.link';
-
-	let component;
 
 	let props = {
 		name: 'Doug',
@@ -15,13 +13,10 @@
 	let width;
 	let height;
 	let vh;
-	let mounted = false;
 
 	onMount(() => {
-		mounted = true;
 		url = $page.url.searchParams.get('url') || url;
 		window.cachedURL = url;
-		doFetch(url);
 		handleViewportSize();
 	});
 
@@ -30,42 +25,23 @@
 		height = window.innerHeight;
 		width = document?.body.clientWidth; // excludes scrollbar
 	}
-
-	$: if (mounted && url && window.cachedURL != url) doFetch(url);
-
-	let fetched;
-
-	async function doFetch(url) {
-		try {
-			console.log('fetching', url);
-			fetched = await fetch(url);
-			const text = await fetched.text();
-			console.log('fetched:', { text });
-
-			component = text;
-		} catch (error) {
-			console.log(error);
-		}
-	}
 </script>
 
 <svelte:window on:resize={handleViewportSize} />
 
 <div class="app" style="--vh: {vh}px; height: calc(var(--vh, 1vh) * 100);">
 	<h1 class="text-3xl font-bold py-2">Svelte Component Gateway</h1>
-	<p class="my-2">
-		Loading from<br />
-		<input type="text" name="url" bind:value={url} size="90" class="border p-2" />
-		<a href={url} target="_blank" class="underline text-blue-400">{url}</a>
-	</p>
 
-	Props: {JSON.stringify(props)}
+	<!-- Fetch gets the component from the interwebs and passes it back up here through let:component  -->
+	<FetchComponent {url} let:component>
+		Props: {JSON.stringify(props)}
 
-	<div class="border flex-auto">
-		{#if component}
-			<Gateway esModule={component} bind:props {width} {height} />
-		{/if}
-	</div>
+		<div class="border flex-auto">
+			{#if component}
+				<Gateway esModule={component} bind:props {width} {height} />
+			{/if}
+		</div>
+	</FetchComponent>
 </div>
 
 <style>
