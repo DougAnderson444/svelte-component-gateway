@@ -18,7 +18,7 @@
 
 <style>
 	.iframe-container {
-		height: 100%;
+		height: 105%;
 		-webkit-border-radius: 4px;
 		-moz-border-radius: 4px;
 		border-radius: 4px;
