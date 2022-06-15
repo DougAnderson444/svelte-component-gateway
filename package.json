@@ -1,6 +1,6 @@
 {
 	"name": "@douganderson444/svelte-component-gateway",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"module": "index.js",
 	"main": "package/index.js",
 	"scripts": {

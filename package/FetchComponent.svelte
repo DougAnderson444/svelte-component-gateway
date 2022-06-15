@@ -35,11 +35,11 @@
 	}
 </script>
 
-<p class="my-2">
+<!-- <p class="my-2">
 	Loading from<br />
 	<input type="text" name="url" bind:value={url} size="90" class="border p-2" />
 	<a href={url} target="_blank" class="underline text-blue-400">{url}</a>
-</p>
+</p> -->
 
 <slot {component} />
 
