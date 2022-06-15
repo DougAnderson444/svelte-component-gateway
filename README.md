@@ -45,7 +45,7 @@ Use the Gateway in your mini-apps:
 
 // YourApp.svelte
 
-<Gateway esModule={ExampleComponent} on:change={handleChange} />
+<Gateway esModule={ContactCard} props{{ firstName: 'Doug', lastname: 'Anderson' }} on:change={handleChange} />
 ```
 
 ### Using Vanilla JS ([see ref](https://svelte.dev/docs#run-time-client-side-component-api))
