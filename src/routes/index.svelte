@@ -38,7 +38,8 @@
 
 		<div class="border flex-auto">
 			{#if component}
-				<Gateway esModule={component} bind:props {width} {height} />
+				<!-- on:change bubbles the emited 'change' event to the parent component, if bind:props isn't avail -->
+				<Gateway esModule={component} bind:props {width} {height} on:change />
 			{/if}
 		</div>
 	</FetchComponent>
