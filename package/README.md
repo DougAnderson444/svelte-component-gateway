@@ -6,80 +6,77 @@ Grabs a compiled Svelte component (ES Module) from the interwebs and mounts it s
 
 Save a Svelte component to the internet (maybe using something like [Web3 Repl Deploy](https://douganderson444.github.io/web3-repl-deploy/)) then paste the URL for the resulting es module / Svelte Component into this gateway.
 
-This gateway will render the component and add the props so you can chekc it out.
+This gateway will render the component and add the props so you can check it out.
 
 ## TODO
 
 - [x] Pass in props in a variable way
-- [ ] Pass in props according to Component props schema?
-- [ ] Fetch improvements (Axios?)
+- [x] Pass props back to parent (to save them)
+- [x] Pass default props to parent to capture schema
 
 ## iFrame TODO
 
-- [x] Sandbox the iframe for untrusted code execution
+- [x] [Sandbox](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox) the iframe for untrusted code execution
 - [x] Prevent fetch
 - [x] Prevent XMLHttpRequest
 - [x] Prevent WebSocket
 - [x] Prevent EventSource
-
 - [ ] Prevent adding iframes to the iframe
 - [ ] Prevent href anchors with searchParams
-- [ ] Prevent all encodings (base64, unicode) injections
-- [ ] Prevent re-adding the fetch API (is this even possible?)
-- [ ] Check for eval?
+- [ ] Prevent sanitize props as JSON objects only
 
 ## API
 
 Use the Gateway in your mini-apps:
 
-\*using Svelte to generate a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent)
+### Using Svelte to generate a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent)
 
-```js
-// YourApp.svelte
-
-import { Gateway, CHANGE } from 'svelte-component-gateway'
-
-// emit props on the CONSTANTS. CHANGE  variable
+```svelte
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import Gateway from '@douganderson444/svelte-component-gateway';
 
-    // props
-    export let count = 0
+	// props
+	export let count = 0;
 
-	const dispatch = createEventDispatcher();
-
-    // emits count to consumers of
-    // <Gateway on:change={handleCountChange} />
-    function handleChange(event){
-        dispatch(CHANGE, count)
-    }
+	function handleChange(event) {
+		console.log(`The count is now: `, event.detail.count);
+	}
 </script>
 
-<Gateway esModule={ExampleComponent} on:change={handleChange} />
+// YourApp.svelte
 
+<Gateway esModule={ExampleComponent} on:change={handleChange} />
 ```
 
-## Vanilla JS
+### Using Vanilla JS ([see ref](https://svelte.dev/docs#run-time-client-side-component-api))
 
 ```js
 // yourscript.js
 
-import { ExampleComponent } from ' some-Component-library'
-import { Gateway, CHANGE } from 'svelte-component-gateway'
+import { Gateway } from 'svelte-component-gateway'
+
+// fetch your esModule from the interwebs, [IPFS](https://docs.ipfs.io/concepts/ipfs-gateway/), or perhaps [Arweave](https://docs.arweave.org/developers/server/http-api)
+const fetched = await fetch(url);
+const ExampleComponent = await fetched.text();
 
 const gateway = new Gateway({
-    target: document.getElementById('app'),
+    target: document.getElementById('gateway-element'),
 	props: {
-		// assuming App.svelte contains something like
+		esModule: ExampleComponent,
+        // optional props
+		// assuming ExampleComponent.svelte contains something like
 		// `export let answer`:
-		esModule: ExampleComponent
+        props: { answer: 42 } // we want the answer to be 42 instead of the default
 })
 
 gateway.$on('change',
     event => {
-        // save them somewhere?
+        // save them somewhere
+        // defaults props will be emited on load
         console.log("The following properties changed: ", event.detail)
         }
 )
+
+<div id='gateway-element'></div>
 
 ```
