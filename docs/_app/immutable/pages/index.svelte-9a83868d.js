@@ -14,7 +14,7 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-import { SvelteComponent, init, safe_not_equal, text, claim_text, insert_hydration, detach, element, space, claim_element, children, claim_space, attr, append_hydration, noop, binding_callbacks, bind, create_component, claim_component, mount_component, add_flush_callback, transition_in, transition_out, destroy_component, createEventDispatcher, getContext, create_slot, query_selector_all, src_url_equal, set_input_value, listen, set_data, update_slot_base, get_all_dirty_from_scope, get_slot_changes, component_subscribe, onMount, set_style, globals, group_outros, check_outros } from "../chunks/index-44bcea44.js";
+import { SvelteComponent, init, safe_not_equal, text, claim_text, insert_hydration, detach, element, space, claim_element, children, claim_space, attr, append_hydration, noop, binding_callbacks, bind, create_component, claim_component, mount_component, add_flush_callback, transition_in, transition_out, destroy_component, createEventDispatcher, getContext, create_slot, query_selector_all, src_url_equal, update_slot_base, get_all_dirty_from_scope, get_slot_changes, component_subscribe, onMount, set_style, listen, globals, set_data, group_outros, check_outros, bubble } from "../chunks/index-57b8af39.js";
 var IFrame_svelte_svelte_type_style_lang = "";
 function create_if_block$1(ctx) {
   let t;
@@ -75,13 +75,13 @@ function create_fragment$3(ctx) {
       this.h();
     },
     h() {
-      attr(div0, "class", "header svelte-1yd6ark");
+      attr(div0, "class", "header svelte-1x4d59h");
       attr(iframe_1, "sandbox", "allow-scripts");
       attr(iframe_1, "title", "Rendered Component");
       attr(iframe_1, "srcdoc", ctx[1]);
-      attr(iframe_1, "class", "svelte-1yd6ark");
-      attr(div1, "class", "iframe-inner svelte-1yd6ark");
-      attr(div2, "class", "iframe-container svelte-1yd6ark");
+      attr(iframe_1, "class", "svelte-1x4d59h");
+      attr(div1, "class", "iframe-inner svelte-1x4d59h");
+      attr(div2, "class", "iframe-container svelte-1x4d59h");
     },
     m(target, anchor) {
       insert_hydration(target, div2, anchor);
@@ -284,67 +284,29 @@ const page = {
     return store.subscribe(fn);
   }
 };
-const get_default_slot_changes = (dirty) => ({ component: dirty & 2 });
-const get_default_slot_context = (ctx) => ({ component: ctx[1] });
+const get_default_slot_changes = (dirty) => ({ component: dirty & 1 });
+const get_default_slot_context = (ctx) => ({ component: ctx[0] });
 function create_fragment$1(ctx) {
-  let p;
-  let t0;
-  let br;
-  let t1;
-  let input;
-  let t2;
-  let a;
-  let t3;
-  let t4;
-  let t5;
+  let t;
   let script;
   let script_src_value;
   let link;
   let current;
-  let mounted;
-  let dispose;
   const default_slot_template = ctx[4].default;
   const default_slot = create_slot(default_slot_template, ctx, ctx[3], get_default_slot_context);
   return {
     c() {
-      p = element("p");
-      t0 = text("Loading from");
-      br = element("br");
-      t1 = space();
-      input = element("input");
-      t2 = space();
-      a = element("a");
-      t3 = text(ctx[0]);
-      t4 = space();
       if (default_slot)
         default_slot.c();
-      t5 = space();
+      t = space();
       script = element("script");
       link = element("link");
       this.h();
     },
     l(nodes) {
-      p = claim_element(nodes, "P", { class: true });
-      var p_nodes = children(p);
-      t0 = claim_text(p_nodes, "Loading from");
-      br = claim_element(p_nodes, "BR", {});
-      t1 = claim_space(p_nodes);
-      input = claim_element(p_nodes, "INPUT", {
-        type: true,
-        name: true,
-        size: true,
-        class: true
-      });
-      t2 = claim_space(p_nodes);
-      a = claim_element(p_nodes, "A", { href: true, target: true, class: true });
-      var a_nodes = children(a);
-      t3 = claim_text(a_nodes, ctx[0]);
-      a_nodes.forEach(detach);
-      p_nodes.forEach(detach);
-      t4 = claim_space(nodes);
       if (default_slot)
         default_slot.l(nodes);
-      t5 = claim_space(nodes);
+      t = claim_space(nodes);
       const head_nodes = query_selector_all('[data-svelte="svelte-bpeq2r"]', document.head);
       script = claim_element(head_nodes, "SCRIPT", { src: true });
       var script_nodes = children(script);
@@ -354,53 +316,23 @@ function create_fragment$1(ctx) {
       this.h();
     },
     h() {
-      attr(input, "type", "text");
-      attr(input, "name", "url");
-      attr(input, "size", "90");
-      attr(input, "class", "border p-2");
-      attr(a, "href", ctx[0]);
-      attr(a, "target", "_blank");
-      attr(a, "class", "underline text-blue-400");
-      attr(p, "class", "my-2");
       if (!src_url_equal(script.src, script_src_value = "https://cdn.tailwindcss.com"))
         attr(script, "src", script_src_value);
       attr(link, "href", "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css");
       attr(link, "rel", "stylesheet");
     },
     m(target, anchor) {
-      insert_hydration(target, p, anchor);
-      append_hydration(p, t0);
-      append_hydration(p, br);
-      append_hydration(p, t1);
-      append_hydration(p, input);
-      set_input_value(input, ctx[0]);
-      append_hydration(p, t2);
-      append_hydration(p, a);
-      append_hydration(a, t3);
-      insert_hydration(target, t4, anchor);
       if (default_slot) {
         default_slot.m(target, anchor);
       }
-      insert_hydration(target, t5, anchor);
+      insert_hydration(target, t, anchor);
       append_hydration(document.head, script);
       append_hydration(document.head, link);
       current = true;
-      if (!mounted) {
-        dispose = listen(input, "input", ctx[5]);
-        mounted = true;
-      }
     },
     p(ctx2, [dirty]) {
-      if (dirty & 1 && input.value !== ctx2[0]) {
-        set_input_value(input, ctx2[0]);
-      }
-      if (!current || dirty & 1)
-        set_data(t3, ctx2[0]);
-      if (!current || dirty & 1) {
-        attr(a, "href", ctx2[0]);
-      }
       if (default_slot) {
-        if (default_slot.p && (!current || dirty & 10)) {
+        if (default_slot.p && (!current || dirty & 9)) {
           update_slot_base(default_slot, default_slot_template, ctx2, ctx2[3], !current ? get_all_dirty_from_scope(ctx2[3]) : get_slot_changes(default_slot_template, ctx2[3], dirty, get_default_slot_changes), get_default_slot_context);
         }
       }
@@ -416,31 +348,25 @@ function create_fragment$1(ctx) {
       current = false;
     },
     d(detaching) {
-      if (detaching)
-        detach(p);
-      if (detaching)
-        detach(t4);
       if (default_slot)
         default_slot.d(detaching);
       if (detaching)
-        detach(t5);
+        detach(t);
       detach(script);
       detach(link);
-      mounted = false;
-      dispose();
     }
   };
 }
 function instance$1($$self, $$props, $$invalidate) {
   let $page;
-  component_subscribe($$self, page, ($$value) => $$invalidate(7, $page = $$value));
+  component_subscribe($$self, page, ($$value) => $$invalidate(6, $page = $$value));
   let { $$slots: slots = {}, $$scope } = $$props;
   let { url } = $$props;
   let component;
   let mounted = false;
   onMount(() => {
     $$invalidate(2, mounted = true);
-    $$invalidate(0, url = $page.url.searchParams.get("url") || url);
+    $$invalidate(1, url = $page.url.searchParams.get("url") || url);
     window.cachedURL = url;
     doFetch(url);
   });
@@ -456,33 +382,29 @@ function instance$1($$self, $$props, $$invalidate) {
       console.log("fetching", url2, { fetched });
       const text2 = await fetched.text();
       console.log("fetched:", { text: text2 });
-      $$invalidate(1, component = text2);
+      $$invalidate(0, component = text2);
     } catch (error) {
       console.log(error);
     }
   }
-  function input_input_handler() {
-    url = this.value;
-    $$invalidate(0, url);
-  }
   $$self.$$set = ($$props2) => {
     if ("url" in $$props2)
-      $$invalidate(0, url = $$props2.url);
+      $$invalidate(1, url = $$props2.url);
     if ("$$scope" in $$props2)
       $$invalidate(3, $$scope = $$props2.$$scope);
   };
   $$self.$$.update = () => {
-    if ($$self.$$.dirty & 5) {
+    if ($$self.$$.dirty & 6) {
       if (mounted && url && window.cachedURL != url)
         doFetch(url);
     }
   };
-  return [url, component, mounted, $$scope, slots, input_input_handler];
+  return [component, url, mounted, $$scope, slots];
 }
 class FetchComponent extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance$1, create_fragment$1, safe_not_equal, { url: 0 });
+    init(this, options, instance$1, create_fragment$1, safe_not_equal, { url: 1 });
   }
 }
 var index_svelte_svelte_type_style_lang = "";
@@ -495,7 +417,7 @@ function create_if_block(ctx) {
     ctx[6](value);
   }
   let gateway_props = {
-    esModule: ctx[8],
+    esModule: ctx[9],
     width: ctx[2],
     height: ctx[3]
   };
@@ -504,6 +426,7 @@ function create_if_block(ctx) {
   }
   gateway = new Gateway({ props: gateway_props });
   binding_callbacks.push(() => bind(gateway, "props", gateway_props_binding));
+  gateway.$on("change", ctx[7]);
   return {
     c() {
       create_component(gateway.$$.fragment);
@@ -517,8 +440,8 @@ function create_if_block(ctx) {
     },
     p(ctx2, dirty) {
       const gateway_changes = {};
-      if (dirty & 256)
-        gateway_changes.esModule = ctx2[8];
+      if (dirty & 512)
+        gateway_changes.esModule = ctx2[9];
       if (dirty & 4)
         gateway_changes.width = ctx2[2];
       if (dirty & 8)
@@ -552,7 +475,7 @@ function create_default_slot(ctx) {
   let t2;
   let div;
   let current;
-  let if_block = ctx[8] && create_if_block(ctx);
+  let if_block = ctx[9] && create_if_block(ctx);
   return {
     c() {
       t0 = text("Props: ");
@@ -589,10 +512,10 @@ function create_default_slot(ctx) {
     p(ctx2, dirty) {
       if ((!current || dirty & 2) && t1_value !== (t1_value = JSON.stringify(ctx2[1]) + ""))
         set_data(t1, t1_value);
-      if (ctx2[8]) {
+      if (ctx2[9]) {
         if (if_block) {
           if_block.p(ctx2, dirty);
-          if (dirty & 256) {
+          if (dirty & 512) {
             transition_in(if_block, 1);
           }
         } else {
@@ -648,8 +571,8 @@ function create_fragment(ctx) {
       $$slots: {
         default: [
           create_default_slot,
-          ({ component }) => ({ 8: component }),
-          ({ component }) => component ? 256 : 0
+          ({ component }) => ({ 9: component }),
+          ({ component }) => component ? 512 : 0
         ]
       },
       $$scope: { ctx }
@@ -698,7 +621,7 @@ function create_fragment(ctx) {
       const fetchcomponent_changes = {};
       if (dirty & 1)
         fetchcomponent_changes.url = ctx2[0];
-      if (dirty & 782) {
+      if (dirty & 1550) {
         fetchcomponent_changes.$$scope = { dirty, ctx: ctx2 };
       }
       fetchcomponent.$set(fetchcomponent_changes);
@@ -727,7 +650,7 @@ function create_fragment(ctx) {
 }
 function instance($$self, $$props, $$invalidate) {
   let $page;
-  component_subscribe($$self, page, ($$value) => $$invalidate(7, $page = $$value));
+  component_subscribe($$self, page, ($$value) => $$invalidate(8, $page = $$value));
   let url = "https://bafybeifeyoww62kxwmpdkqpqou6yxjpo7jstfxujfoxjy5exqjvldyqixu.ipfs.dweb.link";
   let props = { name: "Doug", lastName: "Anders" };
   let width;
@@ -747,7 +670,19 @@ function instance($$self, $$props, $$invalidate) {
     props = value;
     $$invalidate(1, props);
   }
-  return [url, props, width, height, vh, handleViewportSize, gateway_props_binding];
+  function change_handler(event) {
+    bubble.call(this, $$self, event);
+  }
+  return [
+    url,
+    props,
+    width,
+    height,
+    vh,
+    handleViewportSize,
+    gateway_props_binding,
+    change_handler
+  ];
 }
 class Routes extends SvelteComponent {
   constructor(options) {
@@ -756,4 +691,4 @@ class Routes extends SvelteComponent {
   }
 }
 export { Routes as default };
-//# sourceMappingURL=index.svelte-7a97d56f.js.map
+//# sourceMappingURL=index.svelte-9a83868d.js.map
