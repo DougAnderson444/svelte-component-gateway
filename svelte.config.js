@@ -36,8 +36,8 @@ const config = {
 			base: process.env.NODE_ENV === 'development' ? '' : '/svelte-component-gateway'
 		},
 		package: {
-			exports: (file) => file == 'index.js'
-			// files: (file) => file == 'Gateway.svelte'
+			// exports: (file) => file == 'index.js',
+			// files: (file) => file == 'ComponentMounter.svelte'
 		},
 		vite: {
 			// plugins:[{
