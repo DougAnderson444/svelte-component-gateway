@@ -1,5 +1,4 @@
 <script>
-	// import { Peerpiper } from '@peerpiper/awesome-peerpiper-components';
 	import ComponentMounter from '../ComponentMounter.svelte';
 
 	import './preventNetworkCalls.js';

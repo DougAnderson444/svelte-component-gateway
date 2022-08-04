@@ -20,14 +20,6 @@ function is_function(thing) {
 function safe_not_equal(a, b) {
   return a != a ? b == b : a !== b || (a && typeof a === "object" || typeof a === "function");
 }
-let src_url_equal_anchor;
-function src_url_equal(element_src, url) {
-  if (!src_url_equal_anchor) {
-    src_url_equal_anchor = document.createElement("a");
-  }
-  src_url_equal_anchor.href = url;
-  return element_src === src_url_equal_anchor.href;
-}
 function is_empty(obj) {
   return Object.keys(obj).length === 0;
 }
@@ -361,9 +353,6 @@ function custom_event(type, detail, { bubbles = false, cancelable = false }) {
   e.initCustomEvent(type, bubbles, cancelable, detail);
   return e;
 }
-function query_selector_all(selector, parent = document.body) {
-  return Array.from(parent.querySelectorAll(selector));
-}
 let current_component;
 function set_current_component(component) {
   current_component = component;
@@ -499,6 +488,8 @@ function transition_out(block, local, detach2, callback) {
       }
     });
     block.o(local);
+  } else if (callback) {
+    callback();
   }
 }
 const globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : global;
@@ -659,5 +650,5 @@ class SvelteComponent {
     }
   }
 }
-export { SvelteComponent, action_destroyer, add_flush_callback, add_render_callback, add_resize_listener, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_svg_element, claim_text, component_subscribe, createEventDispatcher, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, globals, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, query_selector_all, safe_not_equal, setContext, set_data, set_style, space, src_url_equal, svg_element, text, tick, transition_in, transition_out, update_slot_base };
-//# sourceMappingURL=index-28363ebc.js.map
+export { SvelteComponent, action_destroyer, add_flush_callback, add_render_callback, add_resize_listener, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_svg_element, claim_text, component_subscribe, createEventDispatcher, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, globals, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, safe_not_equal, setContext, set_data, set_style, space, svg_element, text, tick, transition_in, transition_out, update_slot_base };
+//# sourceMappingURL=index-b564bed4.js.map
