@@ -1,13 +1,20 @@
 <script>
 	import { onMount } from 'svelte';
-	import Gateway, { FetchComponent } from '@douganderson444/svelte-component-gateway';
+	import { Gateway, FetchComponent } from '@douganderson444/svelte-component-gateway';
 	import { page } from '$app/stores';
+	import { PanHandle } from '@douganderson444/svelte-panhandle';
+	import { Resizer } from '@douganderson444/svelte-resizable';
 
-	let url = 'https://bafybeifeyoww62kxwmpdkqpqou6yxjpo7jstfxujfoxjy5exqjvldyqixu.ipfs.dweb.link';
+	// import component from '../../../awesome-peerpiper-components/compiled/@peerpiper/ContactCard.svelte.js?raw';
+
+	let url =
+		'https://raw.githubusercontent.com/PeerPiper/awesome-peerpiper-components/master/compiled/%40peerpiper/ContactCard.svelte.js';
 
 	let props = {
-		name: 'Doug',
-		lastName: 'Anders'
+		profile: {
+			firstName: 'Doug',
+			lastName: 'Anders'
+		}
 	};
 
 	let width;
@@ -25,6 +32,10 @@
 		height = window.innerHeight;
 		width = document?.body.clientWidth; // excludes scrollbar
 	}
+
+	function handleChange(e) {
+		props = Object.assign({}, props, e.detail);
+	}
 </script>
 
 <svelte:window on:resize={handleViewportSize} />
@@ -36,10 +47,15 @@
 	<FetchComponent {url} let:component>
 		Props: {JSON.stringify(props)}
 
-		<div class="border flex-auto">
+		<div
+			class="border flex-auto absolute bg-orange-50/50 h-96 w-full"
+			style="top: 105px; left:10px; min-width: 100px; min-height: 100px;"
+		>
 			{#if component}
 				<!-- on:change bubbles the emited 'change' event to the parent component, if bind:props isn't avail -->
-				<Gateway esModule={component} bind:props {width} {height} on:change />
+				<Gateway esModule={component} {props} {width} {height} on:change={handleChange} />
+				<PanHandle />
+				<Resizer />
 			{/if}
 		</div>
 	</FetchComponent>
