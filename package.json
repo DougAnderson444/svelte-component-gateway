@@ -1,6 +1,6 @@
 {
 	"name": "@douganderson444/svelte-component-gateway",
-	"version": "0.0.13",
+	"version": "0.0.14",
 	"module": "index.js",
 	"svelte": "index.js",
 	"main": "package/index.js",
@@ -20,22 +20,24 @@
 		"@sveltejs/adapter-static": "next",
 		"@sveltejs/kit": "next",
 		"@tsconfig/svelte": "^3.0.0",
+		"autoprefixer": "^10.4.8",
+		"postcss": "^8.4.14",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
 		"rollup-plugin-svelte": "^7.1.0",
 		"rollup-plugin-terser": "^7.0.2",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
-		"svelte-preprocess": "^4.10.6",
+		"svelte-preprocess": "^4.10.7",
 		"svelte-swipeable": "^1.0.9",
 		"svelte2tsx": "^0.5.10",
+		"tailwindcss": "^3.1.7",
 		"typescript": "^4.7.2"
 	},
 	"type": "module",
 	"repository": "https://github.com/DougAnderson444/svelte-component-gateway.git",
 	"dependencies": {
 		"@douganderson444/svelte-panhandle": "github:douganderson444/svelte-panhandle",
-		"@douganderson444/svelte-resizable": "github:douganderson444/svelte-resizable",
-		"@peerpiper/awesome-peerpiper-components": "file:../awesome-peerpiper-components"
+		"@douganderson444/svelte-resizable": "github:douganderson444/svelte-resizable"
 	}
 }

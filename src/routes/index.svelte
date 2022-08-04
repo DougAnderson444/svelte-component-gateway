@@ -13,7 +13,7 @@
 	let props = {
 		profile: {
 			firstName: 'Doug',
-			lastName: 'Anders'
+			lastName: 'Anderson'
 		}
 	};
 
