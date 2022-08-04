@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
+	// import { page } from '$app/stores';
 
 	export let url;
 	let component;
@@ -9,7 +9,7 @@
 
 	onMount(() => {
 		mounted = true;
-		url = $page.url.searchParams.get('url') || url;
+		url = location.url.searchParams.get('url') || url;
 		window.cachedURL = url;
 		doFetch(url);
 	});
