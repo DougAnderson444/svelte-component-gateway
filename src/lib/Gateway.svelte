@@ -5,13 +5,15 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let esModule; // TODO: Handle error if not found
+	export let css = null;
 	export let props; // the consumer of this <Gateway bind:props /> component should bind the props to get updates
-	export let rendered;
+	export let rendered = false;
 
 	// refresh/reload when esModule changes
 	$: if (esModule && iframe) handleLoad();
 
 	let iframe;
+	let setProps;
 
 	const dispatch = createEventDispatcher();
 
@@ -27,17 +29,27 @@
 		const channel = new MessageChannel();
 
 		channel.port1.onmessage = (e) => {
-			props = { ...props, ...e.data }; // update props on any reply from child
+			// props = { ...props, ...e.data }; // update props on any reply from child
 			rendered = true;
-			dispatch(CHANGE, props); // this fires when props change; emits an event to update any listeners consuming this compiled component
+			dispatch(CHANGE, { ...props, ...e.data }); // this fires when props change; emits an event to update any listeners consuming this compiled component
+
+			setProps = (props) => {
+				iframe.contentWindow.postMessage(
+					{ setProps: props }, // push the details to the iframe
+					'*' // there's only 1 contentWindow on the iframe so it' safe to use '*' as origin
+				);
+			};
 		};
 
 		iframe.contentWindow.postMessage(
-			{ esModule, props }, // push the details to loadEsModuleComponent({ esModule, props }) in the iframe
+			{ load: { esModule, props, css } }, // push the details to loadEsModuleComponent({ esModule, props }) in the iframe
 			'*', // there's only 1 contentWindow on the iframe so it' safe to use '*' as origin
 			[channel.port2]
 		); // enables the iframe to send messages containing prop updates back to the parent
 	}
+
+	// update props as they change
+	$: if (props && setProps) setProps(props);
 </script>
 
 <IFrame bind:iframe {srcdoc} {rendered} />
