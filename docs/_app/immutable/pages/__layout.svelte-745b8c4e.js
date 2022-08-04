@@ -1,5 +1,5 @@
-import { SvelteComponent, init, safe_not_equal, create_slot, element, text, space, query_selector_all, claim_element, children, detach, claim_text, claim_space, src_url_equal, attr, append_hydration, insert_hydration, update_slot_base, get_all_dirty_from_scope, get_slot_changes, transition_in, transition_out } from "../chunks/index-57b8af39.js";
-var app = "";
+import { SvelteComponent, init, safe_not_equal, create_slot, element, text, space, query_selector_all, claim_element, children, detach, claim_text, claim_space, src_url_equal, attr, append_hydration, insert_hydration, update_slot_base, get_all_dirty_from_scope, get_slot_changes, transition_in, transition_out } from "../chunks/index-28363ebc.js";
+var app = /* @__PURE__ */ (() => "* { \r\n	margin: 0;\r\n	padding: 0;\r\n	/*  include padding and the border */\r\n	box-sizing: border-box;\r\n	/* more padding on the inside of your box, but you don't want the box to resize */\r\n	/* box-sizing: content-box; */\r\n}\r\n\r\nbody {\r\n	min-height: 100vh;\r\n	/* mobile viewport bug fix */\r\n	min-height: -webkit-fill-available;\r\n	/* height: 100vh; */\r\n	margin: 0;\r\n    position: relative;\r\n}\r\n\r\nhtml {\r\n  height: -webkit-fill-available;\r\n}")();
 function create_fragment(ctx) {
   let script0;
   let script0_src_value;
@@ -145,4 +145,4 @@ class _layout extends SvelteComponent {
   }
 }
 export { _layout as default };
-//# sourceMappingURL=__layout.svelte-e59537f2.js.map
+//# sourceMappingURL=__layout.svelte-745b8c4e.js.map

@@ -85,6 +85,9 @@ function get_all_dirty_from_scope($$scope) {
   }
   return -1;
 }
+function action_destroyer(action_result) {
+  return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
+}
 let is_hydrating = false;
 function start_hydrating() {
   is_hydrating = true;
@@ -153,6 +156,9 @@ function init_hydrate(target) {
     target.insertBefore(toMove[i], anchor);
   }
 }
+function append(target, node) {
+  target.appendChild(node);
+}
 function append_hydration(target, node) {
   if (is_hydrating) {
     init_hydrate(target);
@@ -185,6 +191,9 @@ function detach(node) {
 }
 function element(name) {
   return document.createElement(name);
+}
+function svg_element(name) {
+  return document.createElementNS("http://www.w3.org/2000/svg", name);
 }
 function text(data) {
   return document.createTextNode(data);
@@ -270,6 +279,9 @@ function claim_element_base(nodes, name, attributes, create_element) {
 function claim_element(nodes, name, attributes) {
   return claim_element_base(nodes, name, attributes, element);
 }
+function claim_svg_element(nodes, name, attributes) {
+  return claim_element_base(nodes, name, attributes, svg_element);
+}
 function claim_text(nodes, data) {
   return claim_node(nodes, (node) => node.nodeType === 3, (node) => {
     const dataStr = "" + data;
@@ -296,6 +308,53 @@ function set_style(node, key, value, important) {
   } else {
     node.style.setProperty(key, value, important ? "important" : "");
   }
+}
+let crossorigin;
+function is_crossorigin() {
+  if (crossorigin === void 0) {
+    crossorigin = false;
+    try {
+      if (typeof window !== "undefined" && window.parent) {
+        void window.parent.document;
+      }
+    } catch (error) {
+      crossorigin = true;
+    }
+  }
+  return crossorigin;
+}
+function add_resize_listener(node, fn) {
+  const computed_style = getComputedStyle(node);
+  if (computed_style.position === "static") {
+    node.style.position = "relative";
+  }
+  const iframe = element("iframe");
+  iframe.setAttribute("style", "display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border: 0; opacity: 0; pointer-events: none; z-index: -1;");
+  iframe.setAttribute("aria-hidden", "true");
+  iframe.tabIndex = -1;
+  const crossorigin2 = is_crossorigin();
+  let unsubscribe;
+  if (crossorigin2) {
+    iframe.src = "data:text/html,<script>onresize=function(){parent.postMessage(0,'*')}<\/script>";
+    unsubscribe = listen(window, "message", (event) => {
+      if (event.source === iframe.contentWindow)
+        fn();
+    });
+  } else {
+    iframe.src = "about:blank";
+    iframe.onload = () => {
+      unsubscribe = listen(iframe.contentWindow, "resize", fn);
+    };
+  }
+  append(node, iframe);
+  return () => {
+    if (crossorigin2) {
+      unsubscribe();
+    } else if (unsubscribe && iframe.contentWindow) {
+      unsubscribe();
+    }
+    detach(iframe);
+  };
 }
 function custom_event(type, detail, { bubbles = false, cancelable = false }) {
   const e = document.createEvent("CustomEvent");
@@ -340,12 +399,6 @@ function setContext(key, context) {
 }
 function getContext(key) {
   return get_current_component().$$.context.get(key);
-}
-function bubble(component, event) {
-  const callbacks = component.$$.callbacks[event.type];
-  if (callbacks) {
-    callbacks.slice().forEach((fn) => fn.call(this, event));
-  }
 }
 const dirty_components = [];
 const binding_callbacks = [];
@@ -606,5 +659,5 @@ class SvelteComponent {
     }
   }
 }
-export { SvelteComponent, add_flush_callback, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, bubble, check_outros, children, claim_component, claim_element, claim_space, claim_text, component_subscribe, createEventDispatcher, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, globals, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, query_selector_all, safe_not_equal, setContext, set_data, set_style, space, src_url_equal, text, tick, transition_in, transition_out, update_slot_base };
-//# sourceMappingURL=index-57b8af39.js.map
+export { SvelteComponent, action_destroyer, add_flush_callback, add_render_callback, add_resize_listener, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_svg_element, claim_text, component_subscribe, createEventDispatcher, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, globals, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, query_selector_all, safe_not_equal, setContext, set_data, set_style, space, src_url_equal, svg_element, text, tick, transition_in, transition_out, update_slot_base };
+//# sourceMappingURL=index-28363ebc.js.map
