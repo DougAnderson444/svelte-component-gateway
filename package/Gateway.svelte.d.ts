@@ -4,7 +4,8 @@
 export default class Gateway extends SvelteComponentTyped<{
     esModule: any;
     props: any;
-    rendered: any;
+    css?: any;
+    rendered?: boolean;
 }, {
     [evt: string]: CustomEvent<any>;
 }, {}> {
@@ -17,7 +18,8 @@ declare const __propDef: {
     props: {
         esModule: any;
         props: any;
-        rendered: any;
+        css?: any;
+        rendered?: boolean;
     };
     events: {
         [evt: string]: CustomEvent<any>;

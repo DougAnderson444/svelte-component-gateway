@@ -2,9 +2,9 @@
 /** @typedef {typeof __propDef.events}  IFrameEvents */
 /** @typedef {typeof __propDef.slots}  IFrameSlots */
 export default class IFrame extends SvelteComponentTyped<{
-    iframe: any;
-    srcdoc: any;
     rendered: any;
+    srcdoc: any;
+    iframe?: any;
 }, {
     [evt: string]: CustomEvent<any>;
 }, {}> {
@@ -15,9 +15,9 @@ export type IFrameSlots = typeof __propDef.slots;
 import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
-        iframe: any;
-        srcdoc: any;
         rendered: any;
+        srcdoc: any;
+        iframe?: any;
     };
     events: {
         [evt: string]: CustomEvent<any>;
