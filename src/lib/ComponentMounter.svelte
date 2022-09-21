@@ -80,3 +80,9 @@
 <div bind:this={target}>
 	<!-- Component will be mounted into here  -->
 </div>
+
+<style>
+	div {
+		all: unset;
+	}
+</style>
