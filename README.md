@@ -33,7 +33,7 @@ Use the Gateway in your mini-apps:
 
 ```svelte
 <script>
-	import Gateway from '@douganderson444/svelte-component-gateway';
+	import { Gateway } from '@douganderson444/svelte-component-gateway';
 
 	// props
 	export let count = 0;
@@ -45,7 +45,11 @@ Use the Gateway in your mini-apps:
 
 // YourApp.svelte
 
-<Gateway esModule={ContactCard} props{{ firstName: 'Doug', lastname: 'Anderson' }} on:change={handleChange} />
+<Gateway
+	esModule={ContactCard}
+	props={{ firstName: 'Doug', lastname: 'Anderson' }}
+	on:change={handleChange}
+/>
 ```
 
 ### Using Vanilla JS ([see ref](https://svelte.dev/docs#run-time-client-side-component-api))
@@ -76,6 +80,10 @@ gateway.$on('change',
         console.log("The following properties changed: ", event.detail)
         }
 )
+
+
+...
+<!-- in your html: -->
 
 <div id='gateway-element'></div>
 
