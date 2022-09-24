@@ -1,6 +1,6 @@
 {
 	"name": "@douganderson444/svelte-component-gateway",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"module": "index.js",
 	"svelte": "index.js",
 	"main": "package/index.js",
@@ -31,6 +31,7 @@
 		"svelte-preprocess": "^4.10.7",
 		"svelte-swipeable": "^1.0.9",
 		"svelte2tsx": "^0.5.10",
+		"sveltejs-adapter-ipfs": "^0.3.0",
 		"tailwindcss": "^3.1.7",
 		"typescript": "^4.7.2"
 	},

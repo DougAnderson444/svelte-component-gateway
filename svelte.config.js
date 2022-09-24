@@ -1,5 +1,7 @@
 // import adapter from '@sveltejs/adapter-auto';
-import adapter from '@sveltejs/adapter-static';
+// import adapter from '@sveltejs/adapter-static';
+import adapter from 'sveltejs-adapter-ipfs';
+
 import preprocess from 'svelte-preprocess';
 
 import path from 'path';
@@ -33,7 +35,7 @@ const config = {
 		prerender: { default: true },
 		paths: {
 			// change below to your repo name
-			base: process.env.NODE_ENV === 'development' ? '' : '/svelte-component-gateway'
+			// base: process.env.NODE_ENV === 'development' ? '' : './' // '/svelte-component-gateway'
 		},
 		package: {
 			// exports: (file) => file == 'index.js',
