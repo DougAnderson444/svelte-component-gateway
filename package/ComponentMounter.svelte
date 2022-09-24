@@ -1,5 +1,6 @@
 <script>
 	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+	import { CHANGE } from './iframeSrc/constants.js';
 
 	export let esModule;
 	export let props;
@@ -47,16 +48,16 @@
 
 		let allProps = Object.assign(inits, props);
 
-		dispatch('change', allProps); // trigger "rendered" in Gateway, plus push any default values to the db to save
+		dispatch(CHANGE, allProps); // trigger "rendered" in Gateway, plus push any default values to the db to save
 
 		// on change, Pass props message up to iframe parent so it can be saved/updated
 		component.$on('change', (event) => {
-			dispatch('change', event.detail);
+			dispatch(CHANGE, event.detail);
 		});
 
 		setProps(allProps); // set them after we emit the defaults back to the user to save/display
 
-		// if (url) URL.revokeObjectURL(url); // memory management
+		if (url) URL.revokeObjectURL(url); // memory management
 	}
 
 	function setProps(props) {
@@ -77,6 +78,6 @@
 	{@html css}
 </svelte:head>
 
-<div bind:this={target}>
+<div class="component-mounter-target" bind:this={target} style="all:unset">
 	<!-- Component will be mounted into here  -->
 </div>

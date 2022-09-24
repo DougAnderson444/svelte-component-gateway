@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-	// import { page } from '$app/stores';
 
 	export let url;
 	let component;
@@ -9,7 +8,7 @@
 
 	onMount(() => {
 		mounted = true;
-		url = location.url.searchParams.get('url') || url;
+		url = new URL(document.location).searchParams.get('url') || url;
 		window.cachedURL = url;
 		doFetch(url);
 	});
@@ -35,15 +34,7 @@
 	}
 </script>
 
-<!-- <p class="my-2">
-	Loading from<br />
-	<input type="text" name="url" bind:value={url} size="90" class="border p-2" />
-	<a href={url} target="_blank" class="underline text-blue-400">{url}</a>
-</p> -->
-
+<div>
+	Loading from: {url}
+</div>
 <slot {component} />
-
-<svelte:head>
-	<script src="https://cdn.tailwindcss.com"></script>
-	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
-</svelte:head>

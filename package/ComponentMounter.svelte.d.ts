@@ -6,8 +6,6 @@ export default class ComponentMounter extends SvelteComponentTyped<{
     props: any;
     css: any;
 }, {
-    change: CustomEvent<any>;
-} & {
     [evt: string]: CustomEvent<any>;
 }, {}> {
 }
@@ -22,8 +20,6 @@ declare const __propDef: {
         css: any;
     };
     events: {
-        change: CustomEvent<any>;
-    } & {
         [evt: string]: CustomEvent<any>;
     };
     slots: {};
