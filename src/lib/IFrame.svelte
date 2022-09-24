@@ -6,10 +6,15 @@
 
 	let offsetWidth;
 	let sendWidth;
+	let channel;
+
+	// unsafe hack: https://bugzilla.mozilla.org/show_bug.cgi?id=1389198
+	// let sandbox = 'allow-scripts allow-same-origin'; // danger zone, but needed for camera/mic access
+	let sandbox = 'allow-scripts';
 
 	// synchronize the width of the parent container and the iframe child
 	$: iframe && iframe.addEventListener('load', handleLoad);
-	let channel;
+
 	// Wait for the iframe to load, then configure "width sender"
 	async function handleLoad() {
 		if (!iframe || !offsetWidth) throw new Error('Missing offsetWidth');
@@ -41,7 +46,7 @@
 		// check if iframe element has a sandbox attribute on it
 		if (
 			!iframe.getAttribute('sandbox') ||
-			(iframe.getAttribute('sandbox') && iframe.sandbox != 'allow-scripts allow-same-origin')
+			(iframe.getAttribute('sandbox') && iframe.sandbox != sandbox)
 		) {
 			// if sandbox was removed, reload this iframe
 			iframe.contentWindow.location.reload();
@@ -57,7 +62,7 @@
 	</div>
 	<div class="iframe-inner">
 		<iframe
-			sandbox="allow-scripts allow-same-origin"
+			{sandbox}
 			allow="camera *;microphone *"
 			title="Rendered Component"
 			bind:this={iframe}
