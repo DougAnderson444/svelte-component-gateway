@@ -47,15 +47,16 @@
 	<FetchComponent {url} let:component>
 		Props: {JSON.stringify(props)}
 
+		<!-- absolute removed -->
 		<div
-			class="border flex-auto absolute bg-orange-50/50 h-96 w-full"
+			class="border flex-auto  bg-orange-50/50 h-96 w-full"
 			style="top: 105px; left:10px; min-width: 100px; min-height: 100px;"
 		>
 			{#if component}
 				<!-- on:change bubbles the emited 'change' event to the parent component, if bind:props isn't avail -->
 				<Gateway esModule={component} {props} {width} {height} on:change={handleChange} />
-				<PanHandle />
-				<Resizer />
+				<!-- <PanHandle /> -->
+				<!-- <Resizer /> -->
 			{/if}
 		</div>
 	</FetchComponent>
