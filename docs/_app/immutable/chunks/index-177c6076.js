@@ -77,9 +77,6 @@ function get_all_dirty_from_scope($$scope) {
   }
   return -1;
 }
-function action_destroyer(action_result) {
-  return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
-}
 let is_hydrating = false;
 function start_hydrating() {
   is_hydrating = true;
@@ -184,9 +181,6 @@ function detach(node) {
 function element(name) {
   return document.createElement(name);
 }
-function svg_element(name) {
-  return document.createElementNS("http://www.w3.org/2000/svg", name);
-}
 function text(data) {
   return document.createTextNode(data);
 }
@@ -270,9 +264,6 @@ function claim_element_base(nodes, name, attributes, create_element) {
 }
 function claim_element(nodes, name, attributes) {
   return claim_element_base(nodes, name, attributes, element);
-}
-function claim_svg_element(nodes, name, attributes) {
-  return claim_element_base(nodes, name, attributes, svg_element);
 }
 function claim_text(nodes, data) {
   return claim_node(nodes, (node) => node.nodeType === 3, (node) => {
@@ -650,5 +641,5 @@ class SvelteComponent {
     }
   }
 }
-export { SvelteComponent, action_destroyer, add_flush_callback, add_render_callback, add_resize_listener, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_svg_element, claim_text, component_subscribe, createEventDispatcher, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, globals, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, safe_not_equal, setContext, set_data, set_style, space, svg_element, text, tick, transition_in, transition_out, update_slot_base };
-//# sourceMappingURL=index-b564bed4.js.map
+export { SvelteComponent, add_flush_callback, add_render_callback, add_resize_listener, afterUpdate, append_hydration, assign, attr, bind, binding_callbacks, check_outros, children, claim_component, claim_element, claim_space, claim_text, component_subscribe, createEventDispatcher, create_component, create_slot, destroy_component, detach, element, empty, getContext, get_all_dirty_from_scope, get_slot_changes, get_spread_object, get_spread_update, globals, group_outros, init, insert_hydration, listen, mount_component, noop, onMount, safe_not_equal, setContext, set_data, set_style, space, text, tick, transition_in, transition_out, update_slot_base };
+//# sourceMappingURL=index-177c6076.js.map
