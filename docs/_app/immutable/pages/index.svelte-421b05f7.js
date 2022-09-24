@@ -78,7 +78,7 @@ function create_fragment$3(ctx) {
     },
     h() {
       attr(div0, "class", "header svelte-ygngpq");
-      attr(iframe_1, "sandbox", "allow-scripts allow-same-origin");
+      attr(iframe_1, "sandbox", sandbox);
       attr(iframe_1, "allow", "camera *;microphone *");
       attr(iframe_1, "title", "Rendered Component");
       attr(iframe_1, "srcdoc", ctx[1]);
@@ -128,6 +128,7 @@ function create_fragment$3(ctx) {
     }
   };
 }
+let sandbox = "allow-scripts";
 function instance$3($$self, $$props, $$invalidate) {
   let { iframe = null } = $$props;
   let { srcdoc: srcdoc2 } = $$props;
@@ -173,7 +174,7 @@ function instance$3($$self, $$props, $$invalidate) {
     }
     if ($$self.$$.dirty & 33) {
       if (iframe && channel) {
-        if (!iframe.getAttribute("sandbox") || iframe.getAttribute("sandbox") && iframe.sandbox != "allow-scripts allow-same-origin") {
+        if (!iframe.getAttribute("sandbox") || iframe.getAttribute("sandbox") && iframe.sandbox != sandbox) {
           iframe.contentWindow.location.reload();
         }
       }
@@ -720,4 +721,4 @@ class Routes extends SvelteComponent {
   }
 }
 export { Routes as default };
-//# sourceMappingURL=index.svelte-845d5b33.js.map
+//# sourceMappingURL=index.svelte-421b05f7.js.map
