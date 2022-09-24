@@ -780,7 +780,7 @@ class Root extends SvelteComponent {
 }
 const scriptRel = "modulepreload";
 const seen = {};
-const base = "/svelte-component-gateway/_app/immutable/";
+const base = window.BASE + "/_app/immutable/";
 const __vitePreload = function preload(baseModule, deps) {
   if (!deps || deps.length === 0) {
     return baseModule();
@@ -921,7 +921,7 @@ function notifiable_store(value) {
 }
 function create_updated_store() {
   const { set, subscribe } = writable(false);
-  const initial = "1659631212869";
+  const initial = "1663520600503";
   let timeout;
   async function check() {
     clearTimeout(timeout);
@@ -1911,4 +1911,4 @@ async function start({ paths, target, session, route, spa, trailing_slash, hydra
   dispatchEvent(new CustomEvent("sveltekit:start"));
 }
 export { start };
-//# sourceMappingURL=start-289f4dff.js.map
+//# sourceMappingURL=start-5d5116d3.js.map

@@ -3,14 +3,14 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" href="/svelte-component-gateway/favicon.png" />
+		<link rel="icon" href="./favicon.ico" />
 		<meta http-equiv="content-security-policy" content="">
-	<link rel="stylesheet" href="/svelte-component-gateway/_app/immutable/assets/pages/__layout.svelte-a72ea082.css">
-	<link rel="stylesheet" href="/svelte-component-gateway/_app/immutable/assets/pages/index.svelte-bf74aac0.css">
-	<link rel="modulepreload" href="/svelte-component-gateway/_app/immutable/start-289f4dff.js">
-	<link rel="modulepreload" href="/svelte-component-gateway/_app/immutable/chunks/index-b564bed4.js">
-	<link rel="modulepreload" href="/svelte-component-gateway/_app/immutable/pages/__layout.svelte-8da10363.js">
-	<link rel="modulepreload" href="/svelte-component-gateway/_app/immutable/pages/index.svelte-e7c18f76.js">
+	<link rel="stylesheet" href="./_app/immutable/assets/pages/__layout.svelte-a72ea082.css">
+	<link rel="stylesheet" href="./_app/immutable/assets/pages/index.svelte-bf74aac0.css">
+	<link rel="modulepreload" href="./_app/immutable/start-5d5116d3.js">
+	<link rel="modulepreload" href="./_app/immutable/chunks/index-b564bed4.js">
+	<link rel="modulepreload" href="./_app/immutable/pages/__layout.svelte-8da10363.js">
+	<link rel="modulepreload" href="./_app/immutable/pages/index.svelte-e7c18f76.js">
 	</head>
 	<body>
 		
@@ -28,11 +28,26 @@ Props: {"profile":{"firstName":"Doug","lastName":"Anderson"}}
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1nf7q8y">
-		import { start } from "/svelte-component-gateway/_app/immutable/start-289f4dff.js";
+		
+    <script>
+      window.BASE = (() => {
+        const normalised = (location.pathname.endsWith("/") ? location.pathname.substr(0, location.pathname.length -1) : location.pathname).substr(1);
+        const split = normalised.split('/');
+        const sliced = 0 ? split.slice(0, 0) : split;
+        const str = (sliced.length > 0 && sliced[0] !== "") ? "/" + sliced.join('/') : "";
+        return str;
+      })();
+    </script>
+
+    <script>
+      // ensure we save href as they are loaded, so they do not change on page navigation
+      document.querySelectorAll("link[href]").forEach((v) => v.href = v.href);
+    </script>
+<script type="module" data-sveltekit-hydrate="1nf7q8y">
+		import { start } from "./_app/immutable/start-5d5116d3.js";
 		start({
 			target: document.querySelector('[data-sveltekit-hydrate="1nf7q8y"]').parentNode,
-			paths: {"base":"/svelte-component-gateway","assets":"/svelte-component-gateway"},
+			paths: {"base": window.BASE,"assets":""},
 			session: {},
 			route: true,
 			spa: false,
