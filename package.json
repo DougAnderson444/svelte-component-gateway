@@ -8,6 +8,7 @@
 		"dev": "svelte-kit dev --port 6699",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
+		"publish": "npm publish ./package --access public",
 		"preview": "svelte-kit preview",
 		"prepare": "svelte-kit sync",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",

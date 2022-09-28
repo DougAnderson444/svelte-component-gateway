@@ -31,7 +31,7 @@
 		channel.port1.onmessage = (e) => {
 			// props = { ...props, ...e.data }; // update props on any reply from child
 			rendered = true;
-			dispatch(CHANGE, { ...props, ...e.data }); // this fires when props change; emits an event to update any listeners consuming this compiled component
+			if (props || e.data) dispatch(CHANGE, Object.assign({}, props, e.data)); // this fires when props change; emits an event to update any listeners consuming this compiled component
 
 			setProps = (props) => {
 				iframe.contentWindow.postMessage(
