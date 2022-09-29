@@ -34,12 +34,20 @@ function inlineSvelte(template, dest) {
 
 export default {
 	input: 'src/lib/iframeSrc/main.js',
-	output: {
-		sourcemap: false,
-		format: 'iife',
-		name: 'app',
-		file: 'src/lib/srcdoc/bundled.html'
-	},
+	output: [
+		{
+			sourcemap: false,
+			format: 'iife',
+			name: 'app',
+			file: 'src/lib/srcdoc/bundled.html'
+		},
+		{
+			sourcemap: false,
+			format: 'iife',
+			name: 'app',
+			file: 'static/srcdoc/bundled.html'
+		}
+	],
 	plugins: [
 		svelte({
 			compilerOptions: {
