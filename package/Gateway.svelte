@@ -1,13 +1,24 @@
 <script>
 	import IFrame from './IFrame.svelte';
-	import srcdoc from './srcdoc/bundled.html?raw';
 	import { CHANGE } from './iframeSrc/constants.js';
 	import { createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
+	// import srcdoc from './srcdoc/bundled.html?raw'; // Vite way of importing a file as text
 
 	export let esModule; // TODO: Handle error if not found
 	export let css = null;
 	export let props; // the consumer of this <Gateway bind:props /> component should bind the props to get updates
 	export let rendered = false;
+
+	let srcdoc;
+
+	onMount(async () => {
+		const strUrl = new URL('./srcdoc/bundled.html', location.href);
+		// fetch source code from ./srcdoc/bundled.html
+		const response = await fetch(strUrl);
+		srcdoc = await response.text();
+		console.log({ srcdoc });
+	});
 
 	// refresh/reload when esModule changes
 	$: if (esModule && iframe) handleLoad();

@@ -1,6 +1,6 @@
 {
 	"name": "@douganderson444/svelte-component-gateway",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"module": "index.js",
 	"svelte": "index.js",
 	"main": "index.js",
@@ -37,9 +37,5 @@
 		"typescript": "^4.7.2"
 	},
 	"type": "module",
-	"repository": "https://github.com/DougAnderson444/svelte-component-gateway.git",
-	"dependencies": {
-		"@douganderson444/svelte-panhandle": "github:douganderson444/svelte-panhandle",
-		"@douganderson444/svelte-resizable": "github:douganderson444/svelte-resizable"
-	}
+	"repository": "https://github.com/DougAnderson444/svelte-component-gateway.git"
 }

@@ -28,10 +28,6 @@
   },
   "type": "module",
   "repository": "https://github.com/DougAnderson444/svelte-component-gateway.git",
-  "dependencies": {
-    "@douganderson444/svelte-panhandle": "github:douganderson444/svelte-panhandle",
-    "@douganderson444/svelte-resizable": "github:douganderson444/svelte-resizable"
-  },
   "exports": {
     "./package.json": "./package.json",
     "./ComponentMounter.svelte": "./ComponentMounter.svelte",
