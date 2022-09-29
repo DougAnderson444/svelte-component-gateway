@@ -23,10 +23,7 @@
 			window.cachedURL = url; // reset cache, avoiding duplicate downloads
 			fetched = await fetch(url);
 			if (!fetched.ok) throw new Error(fetched.statusText);
-			console.log('fetching', url, { fetched });
 			const text = await fetched.text();
-			console.log('fetched:', { text });
-
 			component = text;
 		} catch (error) {
 			console.log(error);

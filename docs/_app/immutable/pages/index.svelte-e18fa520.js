@@ -1,4 +1,4 @@
-import { SvelteComponent, init, safe_not_equal, text, claim_text, insert_hydration, detach, element, space, claim_element, children, claim_space, attr, add_render_callback, append_hydration, add_resize_listener, noop, binding_callbacks, bind, create_component, claim_component, mount_component, add_flush_callback, transition_in, transition_out, destroy_component, onMount, createEventDispatcher, create_slot, set_data, update_slot_base, get_all_dirty_from_scope, get_slot_changes, getContext, set_style, listen, component_subscribe, globals, group_outros, check_outros } from "../chunks/index-177c6076.js";
+import { SvelteComponent, init, safe_not_equal, text, claim_text, insert_hydration, detach, element, space, claim_element, children, claim_space, attr, add_render_callback, append_hydration, add_resize_listener, noop, binding_callbacks, bind, create_component, claim_component, mount_component, add_flush_callback, transition_in, transition_out, destroy_component, createEventDispatcher, create_slot, set_data, update_slot_base, get_all_dirty_from_scope, get_slot_changes, onMount, getContext, set_style, listen, component_subscribe, globals, group_outros, check_outros } from "../chunks/index-177c6076.js";
 var IFrame_svelte_svelte_type_style_lang = /* @__PURE__ */ (() => ".iframe-container.svelte-ygngpq{display:flex;flex:1;height:100%;width:100%;border-radius:4px}.header.svelte-ygngpq{font-weight:700;font-size:0.8rem;text-transform:uppercase;color:rgba(0, 0, 0, 0.7)}iframe.svelte-ygngpq{display:flex;flex:1;height:100%;width:100%;border:0}.iframe-inner.svelte-ygngpq{display:flex;flex:1;height:100%}")();
 function create_if_block$1(ctx) {
   let t;
@@ -115,7 +115,7 @@ function create_fragment$3(ctx) {
 let sandbox = "allow-scripts";
 function instance$3($$self, $$props, $$invalidate) {
   let { iframe = null } = $$props;
-  let { srcdoc } = $$props;
+  let { srcdoc: srcdoc2 } = $$props;
   let { rendered } = $$props;
   let offsetWidth;
   let sendWidth;
@@ -144,7 +144,7 @@ function instance$3($$self, $$props, $$invalidate) {
     if ("iframe" in $$props2)
       $$invalidate(0, iframe = $$props2.iframe);
     if ("srcdoc" in $$props2)
-      $$invalidate(1, srcdoc = $$props2.srcdoc);
+      $$invalidate(1, srcdoc2 = $$props2.srcdoc);
     if ("rendered" in $$props2)
       $$invalidate(2, rendered = $$props2.rendered);
   };
@@ -166,7 +166,7 @@ function instance$3($$self, $$props, $$invalidate) {
   };
   return [
     iframe,
-    srcdoc,
+    srcdoc2,
     rendered,
     offsetWidth,
     sendWidth,
@@ -182,17 +182,15 @@ class IFrame extends SvelteComponent {
   }
 }
 const CHANGE = "change";
+var srcdoc = '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<meta name="viewport" content="width=device-width,initial-scale=1" />\n		<style>\n			* {\n				margin: 0;\n				padding: 0;\n				/*  include padding and the border */\n				box-sizing: border-box;\n				/* more padding on the inside of your box, but you don\'t want the box to resize */\n				/* box-sizing: content-box; */\n			}\n\n			body {\n				margin: 0;\n				position: relative;\n			}\n		</style>\n		<script defer type="module">\n			var app=function(){"use strict";function t(){}function e(t){return t()}function n(){return Object.create(null)}function o(t){t.forEach(e)}function s(t){return"function"==typeof t}function r(t,e){return t!=t?e==e:t!==e||t&&"object"==typeof t||"function"==typeof t}function c(t,e,n){t.insertBefore(e,n||null)}function i(t){t.parentNode.removeChild(t)}function u(t){return document.createElement(t)}function l(t){return document.createTextNode(t)}function a(){return l("")}class d{constructor(t=!1){this.is_svg=!1,this.is_svg=t,this.e=this.n=null}c(t){this.h(t)}m(t,e,n=null){var o;this.e||(this.is_svg?this.e=(o=e.nodeName,document.createElementNS("http://www.w3.org/2000/svg",o)):this.e=u(e.nodeName),this.t=e,this.c(t)),this.i(n)}h(t){this.e.innerHTML=t,this.n=Array.from(this.e.childNodes)}i(t){for(let e=0;e<this.n.length;e+=1)c(this.t,this.n[e],t)}p(t){this.d(),this.h(t),this.i(this.a)}d(){this.n.forEach(i)}}let f;function p(t){f=t}function h(){if(!f)throw new Error("Function called outside component initialization");return f}function $(){const t=h();return(e,n,{cancelable:o=!1}={})=>{const s=t.$$.callbacks[e];if(s){const r=function(t,e,{bubbles:n=!1,cancelable:o=!1}){const s=document.createEvent("CustomEvent");return s.initCustomEvent(t,n,o,e),s}(e,n,{cancelable:o});return s.slice().forEach((e=>{e.call(t,r)})),!r.defaultPrevented}return!0}}const m=[],g=[],b=[],y=[],v=Promise.resolve();let _=!1;function w(t){b.push(t)}const x=new Set;let E=0;function k(){const t=f;do{for(;E<m.length;){const t=m[E];E++,p(t),L(t.$$)}for(p(null),m.length=0,E=0;g.length;)g.pop()();for(let t=0;t<b.length;t+=1){const e=b[t];x.has(e)||(x.add(e),e())}b.length=0}while(m.length);for(;y.length;)y.pop()();_=!1,x.clear(),p(t)}function L(t){if(null!==t.fragment){t.update(),o(t.before_update);const e=t.dirty;t.dirty=[-1],t.fragment&&t.fragment.p(t.ctx,e),t.after_update.forEach(w)}}const M=new Set;let j;function O(t,e){t&&t.i&&(M.delete(t),t.i(e))}function N(t,e,n,o){if(t&&t.o){if(M.has(t))return;M.add(t),j.c.push((()=>{M.delete(t),o&&(n&&t.d(1),o())})),t.o(e)}else o&&o()}function R(t,n,r,c){const{fragment:i,on_mount:u,on_destroy:l,after_update:a}=t.$$;i&&i.m(n,r),c||w((()=>{const n=u.map(e).filter(s);l?l.push(...n):o(n),t.$$.on_mount=[]})),a.forEach(w)}function P(t,e){const n=t.$$;null!==n.fragment&&(o(n.on_destroy),n.fragment&&n.fragment.d(e),n.on_destroy=n.fragment=null,n.ctx=[])}function U(t,e){-1===t.$$.dirty[0]&&(m.push(t),_||(_=!0,v.then(k)),t.$$.dirty.fill(0)),t.$$.dirty[e/31|0]|=1<<e%31}function T(e,s,r,c,u,l,a,d=[-1]){const h=f;p(e);const $=e.$$={fragment:null,ctx:null,props:l,update:t,not_equal:u,bound:n(),on_mount:[],on_destroy:[],on_disconnect:[],before_update:[],after_update:[],context:new Map(s.context||(h?h.$$.context:[])),callbacks:n(),dirty:d,skip_bound:!1,root:s.target||h.$$.root};a&&a($.root);let m=!1;if($.ctx=r?r(e,s.props||{},((t,n,...o)=>{const s=o.length?o[0]:n;return $.ctx&&u($.ctx[t],$.ctx[t]=s)&&(!$.skip_bound&&$.bound[t]&&$.bound[t](s),m&&U(e,t)),n})):[],$.update(),m=!0,o($.before_update),$.fragment=!!c&&c($.ctx),s.target){if(s.hydrate){const t=function(t){return Array.from(t.childNodes)}(s.target);$.fragment&&$.fragment.l(t),t.forEach(i)}else $.fragment&&$.fragment.c();s.intro&&O(e.$$.fragment),R(e,s.target,s.anchor,s.customElement),k()}p(h)}class A{$destroy(){P(this,1),this.$destroy=t}$on(t,e){const n=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return n.push(e),()=>{const t=n.indexOf(e);-1!==t&&n.splice(t,1)}}$set(t){var e;this.$$set&&(e=t,0!==Object.keys(e).length)&&(this.$$.skip_bound=!0,this.$$set(t),this.$$.skip_bound=!1)}}const S="change";function C(e){let n,o,s,r;return{c(){var t,e,c;n=new d(!1),o=a(),s=l(" "),r=u("div"),n.a=o,t=r,e="class",null==(c="component-mounter-target")?t.removeAttribute(e):t.getAttribute(e)!==c&&t.setAttribute(e,c),function(t,e,n,o){null===n?t.style.removeProperty(e):t.style.setProperty(e,n,o?"important":"")}(r,"all","unset")},m(t,i){n.m(e[0],document.head),function(t,e){t.appendChild(e)}(document.head,o),c(t,s,i),c(t,r,i),e[6](r)},p(t,[e]){1&e&&n.p(t[0])},i:t,o:t,d(t){i(o),t&&n.d(),t&&i(s),t&&i(r),e[6](null)}}}function H(t,e,n){let{esModule:o}=e,{props:s}=e,{css:r}=e;const c=$();let i,u,l,a;function d(t){i&&t&&i.$set({...t})}var f;return f=()=>{n(5,a=!0)},h().$$.on_mount.push(f),function(t){h().$$.on_destroy.push(t)}((()=>{i&&i.$destroy(),u&&URL.revokeObjectURL(u)})),t.$$set=t=>{"esModule"in t&&n(2,o=t.esModule),"props"in t&&n(3,s=t.props),"css"in t&&n(0,r=t.css)},t.$$.update=()=>{36&t.$$.dirty&&a&&o&&async function(){n(0,r=r?`<style>${r}</style>`:""),i&&(i.$destroy(),URL.revokeObjectURL(u));const t=new Blob([o],{type:"text/javascript"});u=URL.createObjectURL(t);const e=(await import(u)).default;if(!e||!l)return;n(1,l.innerHTML="",l),n(4,i=new e({target:l,props:{}}));const a=i.$$.props;let f={};Object.keys(a).map((t=>{f[t]=i[t]}));let p=Object.assign(f,s);c(S,p),i.$on("change",(t=>{c(S,t.detail)})),d(p),u&&URL.revokeObjectURL(u)}(),24&t.$$.dirty&&i&&s&&d()},[r,l,o,s,i,a,function(t){g[t?"unshift":"push"]((()=>{l=t,n(1,l)}))}]}class q extends A{constructor(t){super(),T(this,t,H,C,r,{esModule:2,props:3,css:0})}}function B(t){let e,n;return e=new q({props:{esModule:t[0],props:t[1]}}),e.$on("change",t[3]),{c(){var t;(t=e.$$.fragment)&&t.c()},m(t,o){R(e,t,o),n=!0},p(t,n){const o={};1&n&&(o.esModule=t[0]),2&n&&(o.props=t[1]),e.$set(o)},i(t){n||(O(e.$$.fragment,t),n=!0)},o(t){N(e.$$.fragment,t),n=!1},d(t){P(e,t)}}}function X(t){let e,n,s,r,u=t[0]&&B(t);return{c(){u&&u.c(),e=a()},m(o,i){var l,a,d,f;u&&u.m(o,i),c(o,e,i),n=!0,s||(l=window,a="message",d=t[2],l.addEventListener(a,d,f),r=()=>l.removeEventListener(a,d,f),s=!0)},p(t,[n]){t[0]?u?(u.p(t,n),1&n&&O(u,1)):(u=B(t),u.c(),O(u,1),u.m(e.parentNode,e)):u&&(j={r:0,c:[],p:j},N(u,1,1,(()=>{u=null})),j.r||o(j.c),j=j.p)},i(t){n||(O(u),n=!0)},o(t){N(u),n=!1},d(t){u&&u.d(t),t&&i(e),s=!1,r()}}}function z(t,e,n){let o,s,r;return[o,s,async function(t){t?.data&&(t?.data.hasOwnProperty("load")&&(n(0,({esModule:o,props:s}=t.data.load),o,n(1,s)),r=e=>{t.ports[0].postMessage(e)}),t?.data.hasOwnProperty("setProps")&&n(1,s=t.data.setProps))},function(t){r&&t.detail&&r(t.detail)}]}globalThis.fetch=()=>(console.log("Nulled out fetch"),{json:()=>({result:"no fetch, sorry"})}),globalThis.XMLHttpRequest=class{constructor(){console.log("Nulled out XHR too")}open=()=>null;send=()=>null},globalThis.WebSocket=null,globalThis.EventSource=null;return new class extends A{constructor(t){super(),T(this,t,z,X,r,{})}}({target:document.body,props:{}})}();\n\n		<\/script>\n	</head>\n\n	<body></body>\n</html>\n';
 function create_fragment$2(ctx) {
   let iframe_1;
   let updating_iframe;
   let current;
   function iframe_1_iframe_binding(value) {
-    ctx[7](value);
+    ctx[6](value);
   }
-  let iframe_1_props = {
-    srcdoc: ctx[2],
-    rendered: ctx[0]
-  };
+  let iframe_1_props = { srcdoc, rendered: ctx[0] };
   if (ctx[1] !== void 0) {
     iframe_1_props.iframe = ctx[1];
   }
@@ -211,8 +209,6 @@ function create_fragment$2(ctx) {
     },
     p(ctx2, [dirty]) {
       const iframe_1_changes = {};
-      if (dirty & 4)
-        iframe_1_changes.srcdoc = ctx2[2];
       if (dirty & 1)
         iframe_1_changes.rendered = ctx2[0];
       if (!updating_iframe && dirty & 2) {
@@ -242,13 +238,6 @@ function instance$2($$self, $$props, $$invalidate) {
   let { css = null } = $$props;
   let { props } = $$props;
   let { rendered = false } = $$props;
-  let srcdoc;
-  onMount(async () => {
-    const strUrl = new URL("./srcdoc/bundled.html", location.href);
-    const response = await fetch(strUrl);
-    $$invalidate(2, srcdoc = await response.text());
-    console.log({ srcdoc });
-  });
   let iframe;
   let setProps;
   const dispatch = createEventDispatcher();
@@ -260,7 +249,7 @@ function instance$2($$self, $$props, $$invalidate) {
       $$invalidate(0, rendered = true);
       if (props || e.data)
         dispatch(CHANGE, Object.assign({}, props, e.data));
-      $$invalidate(6, setProps = (props2) => {
+      $$invalidate(5, setProps = (props2) => {
         iframe.contentWindow.postMessage({ setProps: props2 }, "*");
       });
     };
@@ -272,45 +261,36 @@ function instance$2($$self, $$props, $$invalidate) {
   }
   $$self.$$set = ($$props2) => {
     if ("esModule" in $$props2)
-      $$invalidate(3, esModule = $$props2.esModule);
+      $$invalidate(2, esModule = $$props2.esModule);
     if ("css" in $$props2)
-      $$invalidate(4, css = $$props2.css);
+      $$invalidate(3, css = $$props2.css);
     if ("props" in $$props2)
-      $$invalidate(5, props = $$props2.props);
+      $$invalidate(4, props = $$props2.props);
     if ("rendered" in $$props2)
       $$invalidate(0, rendered = $$props2.rendered);
   };
   $$self.$$.update = () => {
-    if ($$self.$$.dirty & 10) {
+    if ($$self.$$.dirty & 6) {
       if (esModule && iframe)
         handleLoad();
     }
     if ($$self.$$.dirty & 2) {
       iframe && iframe.addEventListener("load", handleLoad);
     }
-    if ($$self.$$.dirty & 96) {
+    if ($$self.$$.dirty & 48) {
       if (props && setProps)
         setProps(props);
     }
   };
-  return [
-    rendered,
-    iframe,
-    srcdoc,
-    esModule,
-    css,
-    props,
-    setProps,
-    iframe_1_iframe_binding
-  ];
+  return [rendered, iframe, esModule, css, props, setProps, iframe_1_iframe_binding];
 }
 class Gateway extends SvelteComponent {
   constructor(options) {
     super();
     init(this, options, instance$2, create_fragment$2, safe_not_equal, {
-      esModule: 3,
-      css: 4,
-      props: 5,
+      esModule: 2,
+      css: 3,
+      props: 4,
       rendered: 0
     });
   }
@@ -403,9 +383,7 @@ function instance$1($$self, $$props, $$invalidate) {
       fetched = await fetch(url2);
       if (!fetched.ok)
         throw new Error(fetched.statusText);
-      console.log("fetching", url2, { fetched });
       const text2 = await fetched.text();
-      console.log("fetched:", { text: text2 });
       $$invalidate(1, component = text2);
     } catch (error) {
       console.log(error);
@@ -724,4 +702,4 @@ class Routes extends SvelteComponent {
   }
 }
 export { Routes as default };
-//# sourceMappingURL=index.svelte-81020215.js.map
+//# sourceMappingURL=index.svelte-e18fa520.js.map

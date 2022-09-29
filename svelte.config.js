@@ -35,7 +35,7 @@ const config = {
 		prerender: { default: true },
 		paths: {
 			// change below to your repo name
-			// base: process.env.NODE_ENV === 'development' ? '' : './' // '/svelte-component-gateway'
+			base: '/svelte-component-gateway' // process.env.NODE_ENV === 'development' ? '' : './' //
 		},
 		package: {
 			// exports: (file) => file == 'index.js',
