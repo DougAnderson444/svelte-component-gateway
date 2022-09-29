@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import { Gateway, FetchComponent } from '@douganderson444/svelte-component-gateway';
 	import { page } from '$app/stores';
-	import { PanHandle } from '@douganderson444/svelte-panhandle';
-	import { Resizer } from '@douganderson444/svelte-resizable';
+	// import { PanHandle } from '@douganderson444/svelte-panhandle';
+	// import { Resizer } from '@douganderson444/svelte-resizable';
 
 	// import component from '../../../awesome-peerpiper-components/compiled/@peerpiper/ContactCard.svelte.js?raw';
 
