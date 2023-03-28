@@ -32,20 +32,20 @@ function inlineSvelte(template, dest) {
 	};
 }
 
-export default {
-	input: 'src/lib/iframeSrc/main.js',
+const generateConfig = (input, filename) => ({
+	input,
 	output: [
 		{
 			sourcemap: false,
 			format: 'iife',
 			name: 'app',
-			file: 'src/lib/srcdoc/bundled.html'
+			file: `src/lib/srcdoc/${filename}`
 		},
 		{
 			sourcemap: false,
 			format: 'iife',
 			name: 'app',
-			file: 'static/srcdoc/bundled.html'
+			file: `static/srcdoc/${filename}`
 		}
 	],
 	plugins: [
@@ -79,4 +79,9 @@ export default {
 	watch: {
 		clearScreen: false
 	}
-};
+});
+
+export default [
+	generateConfig('src/lib/iframeSrc/networkAllowed.js', 'networkAllowed.html'),
+	generateConfig('src/lib/iframeSrc/networkIsolated.js', 'networkIsolated.html')
+];

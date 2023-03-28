@@ -1,4 +1,4 @@
-// Block netowrk access to safely execute javascript on your data
+// Block netowrk access to safely execute javascript on your data without call home possibilities
 
 globalThis.fetch = () => {
 	console.log('Nulled out fetch');

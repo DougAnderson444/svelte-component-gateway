@@ -1,12 +1,17 @@
 <script>
+	import { onMount, createEventDispatcher } from 'svelte';
+
 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox
 	export let iframe = null;
 	export let srcdoc;
 	export let rendered;
 
+	const dispatch = createEventDispatcher();
+
 	let offsetWidth;
 	let sendWidth;
 	let channel;
+	let target;
 
 	// unsafe hack: https://bugzilla.mozilla.org/show_bug.cgi?id=1389198
 	// let sandbox = 'allow-scripts allow-same-origin'; // danger zone, but needed for camera/mic access
@@ -18,6 +23,8 @@
 	// Wait for the iframe to load, then configure "width sender"
 	async function handleLoad() {
 		if (!iframe || !offsetWidth) throw new Error('Missing offsetWidth');
+
+		dispatch('target', target);
 
 		channel = new MessageChannel();
 
@@ -54,7 +61,7 @@
 	}
 </script>
 
-<div class="iframe-container">
+<div class="iframe-container" bind:this={target}>
 	<div class="header">
 		{#if !rendered}
 			Rendering...

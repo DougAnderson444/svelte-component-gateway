@@ -30,12 +30,14 @@
 		url = URL.createObjectURL(blob);
 
 		const App = (await import(/* @vite-ignore */ url)).default;
+		dispatch('ready', App);
 
 		if (!App || !target) return;
 
 		target.innerHTML = '';
 
 		component = new App({ target, props: {} });
+		dispatch('mounted', component);
 
 		// get the default values of component for each of the keys of component.$$.props
 		// this way the parent component can deduce the schema of the data

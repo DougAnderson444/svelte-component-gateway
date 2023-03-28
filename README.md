@@ -1,4 +1,4 @@
-# Svelte Component Gateway
+# Svelte Component Gateways
 
 Grabs a compiled Svelte component (ES Module) from the interwebs and mounts it so it to the DOM, so you can check it out, use it, and run your data (props) through it.
 
@@ -33,7 +33,9 @@ Use the Gateway in your mini-apps:
 
 ```svelte
 <script>
-	import { Gateway } from '@douganderson444/svelte-component-gateway';
+	import { NetworkIsolated as Gateway } from '@douganderson444/svelte-component-gateway';
+	// or, if you want the mounted Javascript code to have access to the network:
+	// import { NetworkAllowed as Gateway } from '@douganderson444/svelte-component-gateway';
 
 	// props
 	export let count = 0;
@@ -57,7 +59,7 @@ Use the Gateway in your mini-apps:
 ```js
 // yourscript.js
 
-import { Gateway } from 'svelte-component-gateway'
+import { NetworkIsolated as Gateway } from 'svelte-component-gateway'
 
 // fetch your esModule from the interwebs, [IPFS](https://docs.ipfs.io/concepts/ipfs-gateway/), or perhaps [Arweave](https://docs.arweave.org/developers/server/http-api)
 const fetched = await fetch(url);

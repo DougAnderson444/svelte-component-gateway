@@ -1,8 +1,6 @@
 <script>
 	import ComponentMounter from '../ComponentMounter.svelte';
 
-	import './preventNetworkCalls.js';
-
 	let esModule;
 	let props;
 	let reply;

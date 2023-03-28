@@ -7,3 +7,5 @@ It's done this way to take advantage of Svelte's tooling and the npm library eco
 But this needs to be compiled into plain old JS and HTML before the main app run.
 
 That's done via Rollup (`rollup.config.js`) then saved to the srcdoc folder as index.html as part of the build step in `svelte.config.js`
+
+The Vite `?raw` is compiled and inlined in the compiled source code via `./inlineSrcdoc.js` in the root path.

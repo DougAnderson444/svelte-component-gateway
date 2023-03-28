@@ -1,41 +1,53 @@
 {
 	"name": "@douganderson444/svelte-component-gateway",
-	"version": "0.0.18",
-	"module": "index.js",
-	"svelte": "index.js",
-	"main": "index.js",
+	"version": "0.0.20",
 	"scripts": {
-		"dev": "svelte-kit dev --port 6699",
-		"build": "svelte-kit build",
-		"package": "svelte-kit package && node inlineSrcdoc.js",
-		"publish": "npm publish ./package --access public",
-		"preview": "svelte-kit preview",
-		"prepare": "svelte-kit sync",
-		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
-		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+		"dev": "vite dev",
+		"build": "vite build && npm run package",
+		"preview": "vite preview",
+		"package": "svelte-kit sync && svelte-package && publint && node inlineSrcdoc.js",
+		"prepublishOnly": "npm run package",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"test:unit": "vitest",
+		"lint": "prettier --plugin-search-dir . --check .",
+		"format": "prettier --plugin-search-dir . --write ."
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"peerDependencies": {
+		"svelte": "^3.54.0"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^22.0.0",
-		"@rollup/plugin-node-resolve": "^13.3.0",
-		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-static": "next",
-		"@sveltejs/kit": "next",
-		"@tsconfig/svelte": "^3.0.0",
-		"autoprefixer": "^10.4.8",
-		"postcss": "^8.4.14",
-		"prettier": "^2.5.1",
-		"prettier-plugin-svelte": "^2.5.0",
-		"rollup-plugin-svelte": "^7.1.0",
+		"@rollup/plugin-commonjs": "^24.0.1",
+		"@rollup/plugin-node-resolve": "^15.0.1",
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-static": "^2.0.1",
+		"@sveltejs/kit": "^1.5.0",
+		"@sveltejs/package": "^2.0.0",
+		"autoprefixer": "^10.4.14",
+		"postcss": "^8.4.21",
+		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.8.1",
+		"publint": "^0.1.9",
+		"rollup-plugin-svelte": "^7.1.4",
 		"rollup-plugin-terser": "^7.0.2",
-		"svelte": "^3.44.0",
-		"svelte-check": "^2.7.1",
-		"svelte-preprocess": "^4.10.7",
-		"svelte-swipeable": "^1.0.9",
-		"svelte2tsx": "^0.5.10",
-		"sveltejs-adapter-ipfs": "^0.3.0",
-		"tailwindcss": "^3.1.7",
-		"typescript": "^4.7.2"
+		"svelte": "^3.54.0",
+		"svelte-check": "^3.0.1",
+		"tailwindcss": "^3.3.0",
+		"tslib": "^2.4.1",
+		"typescript": "^5.0.0",
+		"vite": "^4.2.0",
+		"vitest": "^0.25.3"
 	},
-	"type": "module",
-	"repository": "https://github.com/DougAnderson444/svelte-component-gateway.git"
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"type": "module"
 }

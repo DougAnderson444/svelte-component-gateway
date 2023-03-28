@@ -2,65 +2,55 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<link rel="icon" href="./svelte-component-gateway/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" href="./svelte-component-gateway/favicon.ico" />
 		<meta http-equiv="content-security-policy" content="">
-	<link rel="stylesheet" href="./svelte-component-gateway/_app/immutable/assets/pages/__layout.svelte-a72ea082.css">
-	<link rel="stylesheet" href="./svelte-component-gateway/_app/immutable/assets/pages/index.svelte-d528e9e6.css">
-	<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/start-36965892.js">
-	<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/chunks/index-177c6076.js">
-	<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/pages/__layout.svelte-a62cb5c3.js">
-	<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/pages/index.svelte-e18fa520.js">
+		<link href="./svelte-component-gateway/_app/immutable/assets/_layout.45f63965.css" rel="stylesheet">
+		<link href="./svelte-component-gateway/_app/immutable/assets/_page.d3045fdb.css" rel="stylesheet">
+		<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/entry/start.8b47babd.js">
+		<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/chunks/index.cdc1ae46.js">
+		<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/chunks/singletons.2c07766f.js">
+		<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/entry/app.74f866f2.js">
+		<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/entry/_layout.svelte.80ee7052.js">
+		<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/entry/_page.svelte.0a013758.js">
+		<link rel="modulepreload" href="./svelte-component-gateway/_app/immutable/chunks/stores.b9b9ea6e.js">
 	</head>
 	<body>
-		
+		<div>
 
 
 
 
-<div class="app svelte-gt431t" style="--vh: undefinedpx; height: calc(var(--vh, 1vh) * 100);"><h1 class="text-3xl font-bold py-2">Svelte Component Gateway</h1>
-
-	
-	<div>Loading from: https://raw.githubusercontent.com/PeerPiper/awesome-peerpiper-components/master/compiled/%40peerpiper/ContactCard.svelte.js</div>
-Props: {"profile":{"firstName":"Doug","lastName":"Anderson"}}
-
-		
-		<div class="border flex-auto bg-orange-50/50 h-96 w-full" style="top: 105px; left:10px; min-width: 100px; min-height: 100px;"></div>
-</div>
 
 
-		
-    <script>
-      window.BASE = (() => {
-        const normalised = (location.pathname.endsWith("/") ? location.pathname.substr(0, location.pathname.length -1) : location.pathname).substr(1);
-        const split = normalised.split('/');
-        const sliced = 0 ? split.slice(0, 0) : split;
-        const str = (sliced.length > 0 && sliced[0] !== "") ? "/" + sliced.join('/') : "";
-        return str;
-      })();
-    </script>
 
-    <script>
-      // ensure we save href as they are loaded, so they do not change on page navigation
-      document.querySelectorAll("link[href]").forEach((v) => v.href = v.href);
-    </script>
-<script type="module" data-sveltekit-hydrate="14xww73">
-		import { start } from "./svelte-component-gateway/_app/immutable/start-36965892.js";
-		start({
-			target: document.querySelector('[data-sveltekit-hydrate="14xww73"]').parentNode,
-			paths: {"base":"/svelte-component-gateway","assets":"/svelte-component-gateway"},
-			session: {},
-			route: true,
-			spa: false,
-			trailing_slash: "never",
-			hydrate: {
-				status: 200,
-				error: null,
-				nodes: [0, 2],
-				params: {},
-				routeId: ""
-			}
-		});
-	</script>
+			
+			<script>
+				{
+					__sveltekit_b7v9py = {
+						env: {},
+						assets: "/svelte-component-gateway",
+						base: new URL("./svelte-component-gateway", location).pathname,
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./svelte-component-gateway/_app/immutable/entry/start.8b47babd.js"),
+						import("./svelte-component-gateway/_app/immutable/entry/app.74f866f2.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_b7v9py.element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
 	</body>
 </html>
